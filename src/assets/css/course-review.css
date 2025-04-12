@@ -1,0 +1,157 @@
+.rating-points{
+    font-size: 74px;
+    font-weight: 700;
+    color: #b4690e;
+    padding-top: 0px !important;
+}
+.rating-stars{
+    margin-top: -20px;
+}
+.rating-block{
+    width: 120px;
+    float:left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: stretch;
+    height: 200px;
+}
+.review-info-block{
+    width: 100% !important;
+}
+
+.review-info-block-right{
+    float:left;
+    padding-left: 20px;
+    padding-top: 16px;
+}
+.review-stars-list-1{
+    /* margin-top: -5px; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.rating-slider{
+    width: 150px !important;
+    float: left;
+    height: 6px;
+    margin-right: 5px;
+}
+.review-stars-list-1 .rating-bar{
+    height: 25px;
+    display: flex !important;
+    align-items: center !important;
+}
+.rating-star-list{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.rating-student-count{
+    font-size: 15px;
+    height: 100%;
+    display: flex !important;
+    align-items: flex-end !important;
+}
+
+/* .review-stars-list-1:nth-of-type(1){
+    margin-top: 20px;
+} */
+.review-list{
+    width: 100%;
+    height: fit-content;
+}
+.reviewer-image{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 1.2px;
+}
+.main-review{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.reviewer-name{
+    font-weight: bolder;
+}
+.review-rating{
+    display: flex;
+    flex-direction: row;
+}
+.review-date{
+    font-size: 14px;
+    color: #6A6F73;
+}
+.review-content p{
+    color:#2D2F31;
+    font-size:14px;
+}
+.student-review-heading{
+    margin-bottom: 20px;
+}
+.rating-page{
+    width: 100%;
+    text-align: left;
+    min-height: 300px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: space-evenly;
+    justify-content: space-evenly;
+    
+    /* padding-left: 20px; */
+}
+.rating-page h3{
+    margin-bottom: 10px;
+}
+.rating-page h5{
+    margin-bottom: 10px;
+}
+.rate-component{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+.review-component div{
+    font-size: medium;
+}
+.review-component textarea{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+@media screen and (max-width: 991px){
+    .review-stars-list-1 .rating-bar{
+        padding-top: 20px !important;
+    }
+    .main-review{
+        width: 90%;}
+}
+
+@media screen and (max-width:490px){
+    .review-info-block-right{
+        padding-left: 0px;
+        margin-top: -30px;
+    }
+}
+@media screen and (max-width:767px){
+    .student-review-heading{
+        padding-left: 20px;
+    }
+}

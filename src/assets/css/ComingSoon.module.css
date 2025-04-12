@@ -1,0 +1,102 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.comingSoon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.comingSoon h1 {
+    font-size: 3rem;
+    margin: 20px 0;
+    animation: fadeIn 1s ease-in-out, bounce 1s infinite alternate;
+}
+
+.comingSoon p {
+    font-size: 1.5rem;
+    color: #e0e0e0;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.spinner {
+    border: 8px solid rgba(255, 255, 255, 0.2);
+    border-top: 8px solid yellow;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 30px;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-20px);
+    }
+}
+
+
+.socials {
+    margin-top: 30px;
+}
+
+.socialIcon {
+    margin: 0 10px;
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+    transition: transform 0.3s;
+}
+
+.socialIcon:hover {
+    transform: scale(1.2);
+}
+
+
+@media (max-width: 600px) {
+    .comingSoon h1 {
+        font-size: 2rem;
+    }
+
+    .comingSoon p {
+        font-size: 1rem;
+    }
+}
