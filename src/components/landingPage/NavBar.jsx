@@ -129,7 +129,7 @@ function NavBar() {
       {/* navigation bar */}
       <section >
         <div className="container-fluid px-3 shadow-sm">
-          <Navbar expand="xl" className="py-2">
+          <Navbar  expand="xl" className="py-2 ">
             <Navbar.Brand className='m-0' >
               <div className='d-flex justify-content-center align-items-center'>
                 <div className="logo-home-2">
@@ -224,7 +224,8 @@ function NavBar() {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mx-auto pt-3 pt-xl-0">
                 <ul className="nav-links menu">
-                  <li className='divider'><Link to="/category-list" > <span><img src={Goal} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>All Categories</span></Link>
+                  <li className='divider'><Link to="/category-list" > <span><img src={Goal} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>
+                  Explore Courses</span></Link>
                     <ul className="submenu  card shadow-sm rounded-2 py-2">
                       {
                         segmentHierarchy?.map((segm, index) => {
@@ -240,12 +241,12 @@ function NavBar() {
                       }
                     </ul>
                   </li>
-                  <li className='divider'><Link to="/category-list" > <span><img src={Skill} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>UpSkilling</span></Link></li>
+                  <li className='divider'><Link to="/category-list" > <span><img src={Skill} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>About Us</span></Link></li>
                   <li className='divider'><a target='_blank' href="https://quadnut.org"> <span><img src={quadNutLogo} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>QuadNut Pro</span></a></li>
-                  <li className='divider'><Link to="/scholarship"> <span><img src={Scholarship} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>Scholarship</span></Link></li>
+                  <li className='divider'><Link to="/coming-soon"> <span><img src={Scholarship} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>Scholarship</span></Link></li>
                   <li className='divider'><Link to="/mock-tests"> <span><img src={MockTest} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>Mock Tests</span></Link></li>
-                  <li className='divider'><Link to="/quadnut-store"> <span><img src={Store} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>QuadNut Store</span></Link></li>
-                  <li className='divider'><Link to="/success-stories"> <span><img src={SuccessStories} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>Success Stories</span></Link></li>
+                  <li className='divider'><Link to="/coming-soon"> <span><img src={Store} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>QuadNut Store</span></Link></li>
+                  <li className='divider'><Link to="/coming-soon"> <span><img src={SuccessStories} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>Success Stories</span></Link></li>
                 </ul>
               </Nav>
               {

@@ -36,7 +36,7 @@ const Home2 = () => {
       <WhatQuadnut />
       <Features />
       <JoinFamily />
-      <BookSession />
+     <BookSession />
       <TrendsCourse />
       <StudyResource />
       <TestimonialSection />

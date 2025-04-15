@@ -135,7 +135,7 @@ function Features() {
 
                                             </div>
                                             <div className="col-xl-12 text-center">
-                                                <h4 className='mb-0 lh-base'>Mentorship <br /> Sessions</h4>
+                                                <h4 className='mb-0 lh-base'>1:1 Mentorship <br /> Sessions</h4>
                                             </div>
                                             <div className="col-xl-12">
                                                 <p className='mb-0 fs-14  features-card-txt text-center '>
