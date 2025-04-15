@@ -135,7 +135,7 @@ function NavBar() {
                 <div className="logo-home-2">
                   <img src={`${urlPrefix}/favicon/${companyData?.favicon}`} alt="QuadNut Logo" />
                 </div>
-                <p className="quadnut-title mb-0 clickable-btn" onClick={() => navigate('/')}>{companyData?.websiteName}</p>
+                <p className="quadnut-title mb-0 clickable-btn d-none d-md-block" onClick={() => navigate('/')}>{companyData?.websiteName}</p>
               </div>
 
             </Navbar.Brand>
@@ -241,7 +241,7 @@ function NavBar() {
                     </ul>
                   </li>
                   <li className='divider'><Link to="/category-list" > <span><img src={Skill} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>UpSkilling</span></Link></li>
-                  <li className='divider'><Link to=""> <span><img src={quadNutLogo} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>QuadNut Champ</span></Link></li>
+                  <li className='divider'><a target='_blank' href="https://quadnut.org"> <span><img src={quadNutLogo} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>QuadNut Pro</span></a></li>
                   <li className='divider'><Link to="/scholarship"> <span><img src={Scholarship} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>Scholarship</span></Link></li>
                   <li className='divider'><Link to="/mock-tests"> <span><img src={MockTest} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>Mock Tests</span></Link></li>
                   <li className='divider'><Link to="/quadnut-store"> <span><img src={Store} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>QuadNut Store</span></Link></li>

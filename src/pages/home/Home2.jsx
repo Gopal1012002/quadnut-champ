@@ -28,11 +28,9 @@ import VideoTestimonialForm from '../../components/landingPage/VideoTestimonialF
 
 const Home2 = () => {
   const { student } = AuthStudent();
-  console.log(student);
-  
   return (
     <>
-      <Head title={'QuadNut - a comprehensive LMS'} />
+      <Head title={'QuadNut Champ - a comprehensive LMS'} />
       <Hero />
       <SearchSection />
       <WhatQuadnut />

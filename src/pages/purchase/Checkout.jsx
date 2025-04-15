@@ -53,7 +53,7 @@ const Checkout = () => {
     e.stateName = currentState?.value;
     e.countryName = currentCountry?.value;
     // e.callbackUrl = `${conf.baseUrl}${conf.basename}/student/verify-order`;
-    e.callbackUrl = `https://quadnut.org${conf.basename}/student/verify-order`;
+    e.callbackUrl = `https://champ.quadnut.org${conf.basename}/student/verify-order`;
     e.courseIdArray = JSON.stringify(
       courseList?.map((course) => course?.courseId)
     );
