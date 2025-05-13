@@ -1,0 +1,84 @@
+
+/* video card */
+.videoCard {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  aspect-ratio: 1 / 1.3;
+  
+}
+
+@media screen and (max-width: 320px) {
+  .videoCard {
+    aspect-ratio: 1 / 1.3 !important;
+  }
+}
+
+
+@media screen and (max-width: 375px) {
+  .videoCard {
+    aspect-ratio: 1 / 1.1 !important;
+  }
+}
+@media screen and (max-width: 425px) {
+  .videoCard {
+    aspect-ratio: 1 / 1 !important;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .videoCard {
+   aspect-ratio: 1 / 1.1 !important;
+  }
+}
+
+
+
+
+.videoThumb {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.videoCard:hover .overlay {
+  opacity: 1;
+}
+
+.playButton {
+  background: white;
+  border: none;
+  font-size: 2rem;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+}
+.info {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+}
+.info h4{
+  color: white;
+  font-weight: 600;
+}
+
+

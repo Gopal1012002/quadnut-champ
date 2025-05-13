@@ -356,22 +356,6 @@ const CourseRead = () => {
               >
                 Overview
               </div>
-              {/* <div
-                className={`course-read-tab-list-1 ${
-                  currentTab === "notes" ? "active" : ""
-                } `}
-                onClick={() => setCurrentTab("notes")}
-              >
-                Notes
-              </div>
-              <div
-                className={`course-read-tab-list-1 ${
-                  currentTab === "announcement" ? "active" : ""
-                }`}
-                onClick={() => setCurrentTab("announcement")}
-              >
-                Announcements
-              </div> */}
               <div
                 className={`course-read-tab-list-1 ${
                   currentTab === "reviews" ? "active" : ""

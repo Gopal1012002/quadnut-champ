@@ -169,6 +169,14 @@
   .custom-modal .modal-header .modal-title {
     font-size: 20px;
   }
+  .mobile-nav-bar{
+    box-shadow: 0px 10px 2px #00000052 !important;
+  }
+  #dropdown-basic.btn:hover {
+    background: none !important;
+    border: none;
+    padding: 0px !important;
+}
 }
 
 @media screen and (max-width:991px) {
@@ -1108,4 +1116,19 @@ ul.mock-details-list {
   text-align: center;
   box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.dropdown-toggle::after{
+  display: none !important;
+}
+
+.typed-color-heading{
+
+}
+.no-cursor{
+  cursor: default !important;
+}
+.text-dark-gray{
+  color: rgb(22, 21, 21) !important;
 }

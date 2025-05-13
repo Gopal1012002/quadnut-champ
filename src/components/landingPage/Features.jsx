@@ -33,10 +33,10 @@ function Features() {
                                 <div className='deco-img'>
                                     <img src={DecorationImg} alt="icon" />
                                 </div>
-                                <h1 className='mb-2 fw-bold'>Key Features</h1>
+                                <h1 className='mb-2 fw-bold '>Key Features</h1>
                             </div>
 
-                            <p>Smart Solutions for Your Needs</p>
+                            <p className='section-heading'>Smart Solutions for Your Needs</p>
                         </div>
                         {/* heading tittle end */}
 
@@ -135,7 +135,7 @@ function Features() {
 
                                             </div>
                                             <div className="col-xl-12 text-center">
-                                                <h4 className='mb-0 lh-base'>Mentorship <br /> Sessions</h4>
+                                                <h4 className='mb-0 lh-base'>1:1 Mentorship <br /> Sessions</h4>
                                             </div>
                                             <div className="col-xl-12">
                                                 <p className='mb-0 fs-14  features-card-txt text-center '>

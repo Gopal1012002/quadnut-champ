@@ -422,10 +422,10 @@ const Home = () => {
           <div className="container">
             <div className="section-header aos" data-aos="fade-up">
               <div className="section-sub-head feature-head text-center mb-0">
-                <h2>{conf?.projectName === 'AWLMS' ? 'AW Learning Management System' : 'Quadnut (powered by MultiVentrix Global) '}</h2>
+                <h2>{'AW Learning Management System'}</h2>
                 <div className="section-text aos" data-aos="fade-up">
                   <p className="mb-0">
-                  {conf?.projectName === 'AWLMS' ? 'AW LMS' : 'QuadNut'} is a comprehensive LMS designed to streamline online education and training. It provides a user-friendly platform for organizations, institutions, and businesses to create, manage, and deliver courses efficiently.
+                  AW LMS is a comprehensive LMS designed to streamline online education and training. It provides a user-friendly platform for organizations, institutions, and businesses to create, manage, and deliver courses efficiently.
                   </p>
                 </div>
               </div>

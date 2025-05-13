@@ -3,7 +3,7 @@
     flex-direction: row; /* Align children side by side */
     width: 100%;
     height: auto; /* Allow the container to expand based on content */
-    /* margin-top: 80px;  */ 
+    margin-top: 80px;  
     border-top: 2px solid black;
     /* height: fit-content; */
 }
@@ -106,7 +106,7 @@
     /* flex: 3;  */
     position: fixed;
     right: 0px;
-    /* top: 83px; */
+    top: 83px;
     overflow-y: scroll;
     overflow-x: hidden;
     scrollbar-width: thin;

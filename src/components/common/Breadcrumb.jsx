@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Breadcrumb = ({ data }) => {
+const Breadcrumb = ({ data, className }) => {
   const [length, setLength] = useState(data?.length);
   return (
     <>
-      <div className="breadcrumb-bar breadcrumb-bar-info small-screen-breadcrumb">
+      <div className={`breadcrumb-bar breadcrumb-bar-info small-screen-breadcrumb ${className}`}>
         <div className="container">
           <div className="row">
             <div className="col-md-12 col-12">

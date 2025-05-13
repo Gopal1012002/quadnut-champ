@@ -11,7 +11,7 @@ import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
 import { MdOutlineRadioButtonUnchecked } from "react-icons/md";
 import { MdOutlineRadioButtonChecked } from "react-icons/md";
 
-function BookSession() {
+function BookSession({id}) {
     const [stateList, setStateList] = useState();
     const [cityList, setCityList] = useState();
     const [isLoading, setLoading] = useState(false);
@@ -136,6 +136,8 @@ function BookSession() {
         if(e.sessionForType !== "Student") {
             e.sessionForType = "College"
         }
+        e.enquiryType = "SCHOLARSHIP"
+        e.scholarshipId = id
 
         setSessionLoading(true);
         CreateDemoSessionRequestService(e).then((res) => {
@@ -173,7 +175,7 @@ function BookSession() {
             return;
         }
         setOtpLoading(true);
-        CreateDemoSessionRequestService({ userEmail: email, type: "submit" }).then((res) => {
+        CreateDemoSessionRequestService({ userEmail: email, type: "submit", enquiryType : "SCHOLARSHIP", scholarshipId: id }).then((res) => {
             toast.success(res?.message);
             setToken(res?.data)
             setOtpType(true)
@@ -188,9 +190,8 @@ function BookSession() {
     }
 
     const onVerifyOtp = () => {
-
         setOtpLoading(true);
-        CreateDemoSessionRequestService({ emailOtp: otp, token, type: "verify" }).then((res) => {
+        CreateDemoSessionRequestService({ emailOtp: otp, token, type: "verify", enquiryType : "SCHOLARSHIP", scholarshipId: id }).then((res) => {
             toast.success(res?.message);
             setToken(res?.data)
             setOtpType(false)
@@ -213,23 +214,10 @@ function BookSession() {
 
     return (
         <>
-            <section className='py-5'>
+            <section className=''>
                 <div className="container">
-                    {/* heading tittle start */}
-                    <div className="col-xl-12 text-center d-flex justify-content-center align-items-center flex-column">
-                        <div className='tittle-box'>
-                            <div className='deco-img d-md-block d-none'>
-                                <img src={DecorationImg} alt="icon" />
-                            </div>
-                            <h1 className='mb-2 fw-bold'>Book Your Session</h1>
-                        </div>
-
-                        <p>Learn From India's Best Teachers</p>
-                    </div>
-                    {/* heading tittle end */}
-
                     <div className="col-xl-12">
-                        <div className='session-box card rounded-0 py-5'>
+                        <div className='rounded-0'>
                             <div className="row gy-2">
                                 <div className="col-lg-12 d-flex justify-content-center">
                                     <div className="card session-card bg-white rounded-3 py-md-5 px-md-4 p-3 mx-2 mx-md-0 mb-0">
@@ -387,60 +375,6 @@ function BookSession() {
                                                             </>
                                                         }
 
-
-                                                        <div className="col-xl-12 interests-container">
-                                                            <label className="form-label">What are you interested in?</label>
-                                                            <div className="interest-options">
-                                                                {[
-                                                                    'Seminars(Offline)',
-                                                                    'Workshops(Offline)',
-                                                                    'Training Programs(Offline)',
-                                                                    'Online Upskilling Programs(Individual)',
-                                                                    'Corporate/Group Upskilling Sessions',
-                                                                    'Other (Please specify)',
-                                                                ].map((interest, index) => (
-                                                                    <div key={index} className="interest-option" onClick={() => toggleInterests(interest)}>
-                                                                        {interests[interest] ? (
-                                                                            <IoCheckbox className="interest-icon" />
-                                                                        ) : (
-                                                                            <MdOutlineCheckBoxOutlineBlank className="interest-icon" />
-                                                                        )}
-                                                                        <span className="interest-label">{interest}</span>
-                                                                    </div>
-                                                                ))}
-                                                            </div>
-                                                        </div>
-
-                                                        {
-                                                            interests['Other (Please specify)'] &&
-                                                            <div className="col-xl-12">
-                                                                <input {...register("otherInterest", {
-                                                                    required: "Please specify the interests",
-                                                                })} className='form-control' placeholder='Other (Please specify)' />
-                                                                {errors.otherInterest && <span className='error-italic my-0 py-0'> {errors.otherInterest.message} </span>}
-                                                            </div>
-                                                        }
-
-                                                        <div className="col-xl-12 interests-container">
-                                                            <label className="form-label">Preferred Training Segment</label>
-
-                                                            <div className="interest-options">
-                                                                {[
-                                                                    'Tech (e.g., Programming, Data Science, AI/ML, etc',
-                                                                    'Non-Tech (e.g., Soft SKills, Communication, Management, etc',
-                                                                ].map((interest, index) => (
-                                                                    <div key={index} className="interest-option" onClick={() => toggleSegments(interest)}>
-                                                                        {segments[interest] ? (
-                                                                            <IoCheckbox className="interest-icon" />
-                                                                        ) : (
-                                                                            <MdOutlineCheckBoxOutlineBlank className="interest-icon" />
-                                                                        )}
-                                                                        <span className="interest-label">{interest}</span>
-                                                                    </div>
-                                                                ))}
-                                                            </div>
-                                                        </div>
-
                                                         <div className="col-xl-12 interests-container">
                                                             <label className="form-label">Preferred Mode of Contact</label>
                                                             <div className="interest-options">
@@ -531,9 +465,6 @@ function BookSession() {
 
                 </div >
             </section >
-
-
-
         </>
     )
 }

@@ -21,6 +21,7 @@ function WhatQuadnut() {
                                 data-aos-easing="linear"
                                 data-aos-duration="1000"
                                 data-aos-delay="300" />
+
                         </div>
                         <div className="col-md-4  px-0">
                             <img src={Img2} alt="image" className="img-fluid" data-aos="zoom-in"
@@ -36,14 +37,7 @@ function WhatQuadnut() {
                         </div>
                     </div>
                 </div>
-
             </section>
-
-
-
-
-
-
         </>
     )
 }

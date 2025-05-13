@@ -12,7 +12,6 @@ const StudentMockResult = ({ data }) => {
         if (data?.studentResponse) {
             let parsedResponse = JSON.parse(data?.studentResponse ?? "");
             parsedResponse = JSON.parse(parsedResponse);
-
             let questionGrade = 0;
             parsedResponse?.map((ques) => {
                 questionGrade += ques?.questionGrade;
@@ -103,7 +102,7 @@ const StudentMockResult = ({ data }) => {
                                                 "bg-white"
                                             }` :
                                             correctAns?.questionType === 'MULTIPLE' ?
-                                                `p-1  ps-2 my-1 rounded d-flex align-items-center ${correctAns?.selectedOptionIdArray?.includes(answer?.answerId) && parsedMultipleAnswers.some(item => item.answerId === answer.answerId) ? "bg-success-mock text-white" :
+                                                `p-1  ps-2 my-1 rounded d-flex align-items-center ${correctAns?.selectedOptionIdArray?.includes(answer?.answerId) && (parsedMultipleAnswers.some(item => item.answerId === answer.answerId) || correctAns?.isCorrected === "YES") ? "bg-success-mock text-white" :
                                                     correctAns?.selectedOptionIdArray?.includes(answer?.answerId) ? "bg-danger-mock text-white" :
                                                         parsedMultipleAnswers.some(item => item.answerId === answer.answerId) ? "bg-success-mock text-white" :
                                                             "bg-white"

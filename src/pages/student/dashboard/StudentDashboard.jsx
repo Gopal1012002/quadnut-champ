@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Breadcrumb from "../../../components/common/Breadcrumb";
-import user16 from "../../../assets/img/user/user16.jpg";
+import user16 from "../../../assets/img/user/user16.png";
 import StudentDashboardComponent from "../../../components/student/studentDashboard/StudentDashboardComponent";
 import StudentSettings from "../../../components/student/StudentSettings";
 import StudentSideBar from "../../../components/student/StudentSideBar";
-import AuthStudent, { StudentPopupCheckService } from "../../../services/StudentServices";
+import AuthStudent, { StudentCoinsBalanceService, StudentPopupCheckService } from "../../../services/StudentServices";
 import Head from "../../../layouts/main-layout/head/Head";
 import StudentProfileView from "../../../components/student/studentProfile/StudentProfileView";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
@@ -19,12 +19,16 @@ import EnrolledCourses from "../../../components/student/studentDashboard/Enroll
 import Cookies from "js-cookie";
 import conf from "../../../conf/conf";
 import { useAuthCompany } from "../../../services/AppServices";
-import { Modal, ModalBody, ModalHeader } from "react-bootstrap";
+import { Button, Modal, ModalBody, ModalHeader, Offcanvas } from "react-bootstrap";
 import { ImCross } from "react-icons/im";
 import CountdownTimer from "../../../components/popups/CountDown";
 import PopupOne from "../../../components/popups/PopupOne";
 import PopupThree from "../../../components/popups/PopupThree";
 import PopupTwo from "../../../components/popups/PopupTwo";
+import { RiMenu2Fill, RiMenu3Line, RiMenu4Fill, RiMenuFold4Line } from "react-icons/ri";
+import defaultLogo from "../../../assets/img/defaultLogo.png";
+import { GiTwoCoins } from "react-icons/gi";
+import { IoMdWallet } from "react-icons/io";
 
 const AuthType = "student";
 
@@ -47,6 +51,24 @@ const StudentDashboard = () => {
   const hasCertificateTab = new URLSearchParams(search).has("certificate-list");
   const haswishlistTab = new URLSearchParams(search).has("wishlist")
   const hasSupportTab = new URLSearchParams(search).has("support")
+  const logo = `${conf.apiAssetUrl}/${companyData?.frontFolder}/logos/${companyData?.logo}`;
+  const [balance, setBalance] = useState();
+  const [coinName, setCoinName] = useState();
+  const [isWalletActive, setWalletActive] = useState(false);
+  const [isLoading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    StudentCoinsBalanceService().then((res) => {
+      setWalletActive(res?.data?.active);
+      setCoinName(res?.data?.coinName);
+      setBalance(res?.data?.balance);
+    }).catch((err) => {
+
+    }).finally(() => {
+      setLoading(false)
+    })
+  }, [])
 
   const { student } = AuthStudent();
   const [currentTab, setCurrentTab] = useState("Dashboard");
@@ -132,18 +154,82 @@ const StudentDashboard = () => {
     }
   }, [location]);
 
+  const [show, setShow] = useState(false);
+  const handleClose = () => {
+    setShow(false)
+  }
+  const toggleShow = () => {
+    setShow(true)
+  }
+
   return (
     <>
       <Head title={`${student?.name}`} />
-      <Breadcrumb data={breadCrumbData} />
+      <Breadcrumb data={breadCrumbData} className="d-none d-md-block" />
       <div className="page-content">
         <div className="container-fluid">
           <div className="row">
             {/* <!-- sidebar --> */}
+            <div className="d-sm-block d-md-none py-2 pt-0 text-start" onClick={toggleShow}>
+              <RiMenu4Fill className="text-primary" size={30} />
+            </div>
+            {/* </Button> */}
+            <Offcanvas show={show} onHide={handleClose} style={{ width: "70%" }} >
+              <Offcanvas.Header className="sidebar-mobile pb-0 mb-0">
+                <Offcanvas.Title  className=" d-flex flex-row justify-content-between w-100  pb-0 mb-0">
+                  <Link to="" className="navbar-brand logo pb-0 mb-0 text-start">
+                    <img
+                      src={logo}
+                      onError={(e) => {
+                        e.target.onerror = null; // prevents infinite loop if defaultLogo also fails
+                        e.target.src = defaultLogo;
+                      }}
+                      className="img-fluid"
+                    />
+                  </Link>
+                  <div onClick={handleClose}>
+                    <p class="menu-close float-end"><i class="fas fa-times"></i></p>
+                  </div>
+                </Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body className="px-0 mt-0 pt-0" >
+                <StudentSideBar
+                  current={currentTab}
+                  setCurrentFunc={setCurrentFunc}
+                  className={"mx-0 rounded-0 mt-0 pt-0"}
+                />
+              </Offcanvas.Body>
+            </Offcanvas>
             <StudentSideBar
+              className={'d-none d-md-block'}
               current={currentTab}
               setCurrentFunc={setCurrentFunc}
             />
+            <div className="settings-widget dash-profile d-sm-block d-md-none ">
+              <div className="settings-menu">
+                <div className="profile-bg">
+                  <div className="profile-img">
+                    <Link to="">
+                      <img
+                        src={`${urlPrefix}/${student?.image}`}
+                        onError={(e) => {
+                          e.target.onerror = null; // prevents infinite loop if defaultLogo also fails
+                          e.target.src = user16;
+                        }}
+                      />
+                    </Link>
+                  </div>
+                </div>
+                <div className="profile-group pt-0">
+                  <div className="profile-name text-center">
+                    <p> <GiTwoCoins color="purple" size={30} /> {balance} {coinName}</p>
+                    <p>
+                      <IoMdWallet size={30} />  {isWalletActive ? <span className="text-success"> Active </span> : <span className="text-danger"> Inactive</span>}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
             {currentTab == "Dashboard" && <StudentDashboardComponent />}
             {currentTab == "Settings" && <StudentSettings />}
             {currentTab == "MyProfile" && <StudentProfileView />}
@@ -167,9 +253,9 @@ const StudentDashboard = () => {
               <a href={popupData?.popupIsURL === 'YES' ? `${popupData?.popupURL}` : '#'} target="_blank">
                 <img src={`${urlPrefix}/${popupData?.popupFileName}`} />
               </a>
-            </div> : popupData?.popupTemplateNo === 'Template 3' ?  <PopupThree heading={popupData?.popupHeading} isLink={popupData?.popupIsURL} link={popupData?.popupURL} description={popupData?.popupText} /> :
-            popupData?.popupTemplateNo === 'Template 2' ? <PopupTwo heading={popupData?.popupHeading} isLink={popupData?.popupIsURL} link={popupData?.popupURL} description={popupData?.popupText} /> :
-            <PopupOne heading={popupData?.popupHeading} isLink={popupData?.popupIsURL} link={popupData?.popupURL} description={popupData?.popupText} />
+            </div> : popupData?.popupTemplateNo === 'Template 3' ? <PopupThree heading={popupData?.popupHeading} isLink={popupData?.popupIsURL} link={popupData?.popupURL} description={popupData?.popupText} /> :
+              popupData?.popupTemplateNo === 'Template 2' ? <PopupTwo heading={popupData?.popupHeading} isLink={popupData?.popupIsURL} link={popupData?.popupURL} description={popupData?.popupText} /> :
+                <PopupOne heading={popupData?.popupHeading} isLink={popupData?.popupIsURL} link={popupData?.popupURL} description={popupData?.popupText} />
           }
           <span className="notification-cross-close-btn clickable-btn">
             <ImCross size={'20'} className="text-bold" onClick={onClosePopupNotification} />

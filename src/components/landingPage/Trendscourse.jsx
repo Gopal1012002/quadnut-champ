@@ -4,7 +4,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
-import { GetTrendingCourses, useAuthCompany } from "../../services/AppServices";
+import { GetFeaturedCourses, GetTrendingCourses, useAuthCompany } from "../../services/AppServices";
 import conf from "../../conf/conf";
 import { minuteToHrs } from "../../utils/dynamic.util";
 import { Link } from "react-router-dom";
@@ -22,7 +22,7 @@ const TrendsCourse = () => {
     useEffect(() => {
         if (companyData) {
             setLoading(true);
-            GetTrendingCourses(student?.studentCode)
+            GetFeaturedCourses(student?.studentCode)
                 .then((res) => {
                     setTrendingList(res?.data);
                 })

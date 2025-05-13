@@ -136,7 +136,7 @@ const MockDetails = () => {
                             </Col>
                             <Col sm={12} className='my-2' >
                                 <p className='text-secondary fs-8'>
-                                    At AW LMS, we believe in empowering learners like you with the skills and knowledge needed to excel in web development. And what better way to do that than with a fun and interactive Mock Test?
+                                    At {companyData?.websiteName}, we believe in empowering learners like you with the skills and knowledge needed to excel in web development. And what better way to do that than with a fun and interactive Mock Test?
                                 </p>
                             </Col>
                             <Col sm={12} className='text-start'>

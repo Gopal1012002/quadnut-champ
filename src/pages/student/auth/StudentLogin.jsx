@@ -223,11 +223,6 @@ const StudentLogin = () => {
                   </div>
                   <form onSubmit={handleSubmit(VerifyTwoFactor)}>
                     <div className="input-block">
-                      {/* <input
-                        type="email"
-                        className="form-control"
-                        placeholder="Enter your email address"
-                      /> */}
                       <OTPInput
                         value={otp}
                         onChange={setOtp}

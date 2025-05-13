@@ -16,9 +16,9 @@ function TestiCard({name, text, data}) {
                         </p>
                     </div>
                     <div className="col-xl-12 d-flex align-items-center  gap-3">
-                        <div className='testi-profile-box p-2'>
+                        {/* <div className='testi-profile-box p-2'>
                             <img src={ProfileImg} alt="img" />
-                        </div>
+                        </div> */}
                         <div>
                             <p className='mb-0 fs-14 fw-bold'> {name} </p>
                             <p className='mb-0 fs-14'> {text} </p>

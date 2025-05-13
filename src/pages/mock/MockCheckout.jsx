@@ -7,6 +7,7 @@ import AuthStudent, {
     GetCountryList,
     GetStateList,
     GetSudentCartService,
+    StudentCoinsBalanceService,
     StudentProfileService,
 } from "../../services/StudentServices";
 import { GetMockTestDetails, useAuthCompany } from "../../services/AppServices";
@@ -19,8 +20,11 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Spinner } from "react-bootstrap";
 import defaultMockIcon from '../../assets/img/icon/mock-test.png'
+import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
+import { IoMdCheckboxOutline } from "react-icons/io";
 
 const MockCheckout = () => {
+    const domain = window.location.hostname;
     const { id, slug } = useParams();
     const {
         control,
@@ -35,6 +39,7 @@ const MockCheckout = () => {
     const { student } = AuthStudent();
     const [originalPrice, setOriginalPrice] = useState(0);
     const [totalDiscount, setTotalDiscount] = useState(0);
+    const [studentCoinsBal, setStudentsCoinsBal] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
     const [urlPrefix, setUrlPrefix] = useState(
         `${conf.apiAssetUrl}/${companyData?.frontFolder}`
@@ -49,6 +54,10 @@ const MockCheckout = () => {
     const [cityList, setCityList] = useState([]);
     const [currentCity, setCurrentCity] = useState({});
     const [mockDetails, setMockDetails] = useState();
+    const [maxRedeemCoins, setMaxRedeemCoins] = useState(0);
+    const [coinName, setCoinName] = useState('');
+    const [isRedeem, setIsRedeem] = useState(false);
+    const [coinAmount, setCoinAmount] = useState(0)
 
     const onCreateOrder = (e) => {
         setLoading(true);
@@ -56,8 +65,9 @@ const MockCheckout = () => {
         e.countryId = currentCountry?.id;
         e.stateName = currentState?.value;
         e.countryName = currentCountry?.value;
+        e.coinAccept = isRedeem ? 'YES' : 'NO';
         // e.callbackUrl = `${conf.baseUrl}${conf.basename}/student/verify-mock-order`;
-        e.callbackUrl = `https://quadnut.org${conf.basename}/student/verify-mock-order`;
+        e.callbackUrl = `https://${domain}${conf.basename}/student/verify-mock-order`;
         // e.callbackUrl = `https://startupify.co.in${conf.basename}/student/verify-mock-order`;
         e.mockTestId = id;
         e.courseIdArray = JSON.stringify(
@@ -164,6 +174,7 @@ const MockCheckout = () => {
         GetMockTestDetails(slug)
             .then((res) => {
                 setMockDetails(res?.data?.data)
+                setMaxRedeemCoins(res?.data?.data?.maxRedeemCoins)
             })
             .catch((err) => {
                 toast.error(err?.response?.data?.message)
@@ -173,6 +184,19 @@ const MockCheckout = () => {
                 setLoading(false);
             });
     }, []);
+
+    useEffect(() => {
+        setLoading(true);
+        StudentCoinsBalanceService().then((res) => {
+            if (res?.data?.active) {
+                setStudentsCoinsBal(res?.data?.balance);
+                setCoinName(res?.data?.coinName)
+                setCoinAmount(res?.data?.coinAmount)
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    }, [])
     return (
         <>
             <Head title="Checkout" />
@@ -467,13 +491,41 @@ const MockCheckout = () => {
                                                 </div>
                                                 <div>- ₹ {mockDetails?.mockDiscountPrice}</div>
                                             </li>
+                                            {
+                                                maxRedeemCoins > 0 && mockDetails?.mockSellingPrice > 0 && <>
+                                                    <li className="d-flex flex-row justify-content-between ">
+                                                        <div>
+                                                            Available Coins :
+                                                        </div>
+                                                        <div> {`${studentCoinsBal} ${coinName}`}</div>
+                                                    </li>
+                                                    <li className={`d-flex flex-row justify-content-between border-bottom pb-2 ${!isRedeem ? 'text-secondary' : ''}`}>
+                                                        <div>
+                                                            Redeem Coins
+                                                            {
+                                                                isRedeem ?
+                                                                    <IoMdCheckboxOutline onClick={() => { maxRedeemCoins <= studentCoinsBal && setIsRedeem(!isRedeem) }} className="clickable-btn fs-4 text-success" /> :
+                                                                    <MdOutlineCheckBoxOutlineBlank onClick={() => { maxRedeemCoins <= studentCoinsBal && setIsRedeem(!isRedeem) }} className="clickable-btn fs-4" />
+                                                            }
+                                                            :
+                                                        </div>
+                                                        <div> {isRedeem && <> - ₹ {`${maxRedeemCoins * coinAmount}`}</>}</div>
+                                                    </li>
+                                                    <li className="d-flex flex-row justify-content-center">
+                                                        ** {maxRedeemCoins <= studentCoinsBal && !isRedeem ? `Use ${coinName} to get another off ₹ ${maxRedeemCoins * coinAmount}` :
+                                                            maxRedeemCoins <= studentCoinsBal && isRedeem ? `Used ${maxRedeemCoins} ${coinName} = ₹ ${maxRedeemCoins * coinAmount}` :
+                                                                maxRedeemCoins > studentCoinsBal && `Insufficient ${coinName} balance, required : ${maxRedeemCoins} ${coinName}`
+                                                        } **
+                                                    </li>
+                                                </>
+                                            }
                                             <li className="d-flex flex-row justify-content-between border-bottom pb-2">
                                                 <div>
                                                     {" "}
                                                     <b>Total : </b>({1} Mock Test){" "}
                                                 </div>
                                                 <div>
-                                                    <b> ₹ {mockDetails?.mockSellingPrice}</b>
+                                                    <b> ₹ {isRedeem ? mockDetails?.mockSellingPrice - (maxRedeemCoins * coinAmount) : mockDetails?.mockSellingPrice}</b>
                                                 </div>
                                             </li>
                                         </ul>

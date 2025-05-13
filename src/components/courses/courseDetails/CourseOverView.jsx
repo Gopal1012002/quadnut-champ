@@ -18,12 +18,14 @@ import {
   minuteToHrsOnly,
   toFirstUpperCase,
 } from "../../../utils/dynamic.util";
-import { GetCertificateStatusService } from "../../../services/StudentServices";
+import { CourseCompletionCoinsTransferService, GetCertificateStatusService } from "../../../services/StudentServices";
 import { toast } from "react-toastify";
 import conf from "../../../conf/conf";
 
 const CourseOverView = ({ courseData, instructorData }) => {
+
   const [isLoading, setLoading] = useState(false);
+  const [isCompletionLoading, setCompletionLoading] = useState(false);
   const [certificateId, setCertificateId] = useState('');
   const handleCertificate = () => {
     setLoading(true);
@@ -40,6 +42,20 @@ const CourseOverView = ({ courseData, instructorData }) => {
         setLoading(false);
       });
   };
+
+  const handleCompletionCheck = () => {
+    setCompletionLoading(true);
+    CourseCompletionCoinsTransferService(courseData?.courseCode)
+      .then((res)=>{
+        toast.success(res?.message);
+      })
+      .catch((err) => {
+        toast.error(err?.response?.data?.message);
+      })
+      .finally(() => {
+        setCompletionLoading(true);
+      })
+  }
   return (
     <>
       <div className="card-body course-read-overview">
@@ -119,6 +135,25 @@ const CourseOverView = ({ courseData, instructorData }) => {
               onClick={handleCertificate}
             >
               {isLoading ? "Checking..." : "Check Certification Status"}
+            </p>
+            <hr />
+          </>
+        )}
+
+        {courseData?.awardedCoins && courseData?.awardedCoins !== 0 && courseData?.awardedCoins > 0 && (
+          <>
+            <hr />
+            <h6 className="mt-2">Reward Coins Status</h6>
+            <p>
+              {" "}
+              Complete course : {courseData?.courseTitle} and get a reward of {courseData?.awardedCoins} coins.
+            </p>
+
+            <p
+              className="btn btn-primary rounded-0"
+              onClick={handleCompletionCheck}
+            >
+              {!isCompletionLoading ? "Checking..." : "Check Reward Status"}
             </p>
             <hr />
           </>

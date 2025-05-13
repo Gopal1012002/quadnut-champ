@@ -103,7 +103,6 @@ const StudentQuizAttempts = () => {
               <Tab eventKey="mock" title="Mock  Attempts">
               </Tab>
             </Tabs>
-            {/* <h3>My Quiz Attempts</h3> */}
           </div>
           <div className="checkout-form">
             <div className="table-responsive custom-table">

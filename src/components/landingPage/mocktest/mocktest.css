@@ -1,0 +1,364 @@
+:root {
+  --color1: #002058;
+  --color2: #ff875a;
+}
+
+.tittle-box {
+  position: relative;
+  width: fit-content;
+}
+
+.deco-img {
+  position: absolute;
+  top: -25px;
+  right: -60px;
+}
+
+.deco-img img {
+  width: 85px;
+}
+
+@media only screen and (max-width: 500px) {
+  .deco-img img {
+    width: 70px;
+  }
+
+  .deco-img {
+    position: absolute;
+    top: -25px;
+    right: -41px;
+  }
+
+}
+
+.mocktest .heading {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--color1);
+}
+
+.mocktest .heading2 {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--color1);
+}
+
+.mocktest .subheading {
+  font-size: 24px;
+  color: #5c6bc0;
+  margin-bottom: 20px;
+}
+
+.mocktest .description {
+  font-size: 16px;
+  color: #444;
+  max-width: 500px;
+}
+
+.mocktest .btn-custom {
+  background-color: var(--color1);
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.mocktest .btn-custom:hover {
+  background-color: var(--color2);
+}
+
+.mocktest ul li {
+  display: flex;
+  align-items: center;
+}
+
+.mocktest ul li::before {
+  margin-right: 10px;
+}
+
+.mocktest .item .icon-box {
+  position: relative;
+  height: 30px;
+  width: 30px;
+  /* background-color: var(--color1); */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  z-index: 1;
+}
+
+.mocktest .item .icon-box:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--color2);
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  transform: scale(0);
+  transition: all 0.4s ease-in-out;
+  z-index: 0;
+}
+
+.mocktest .item:hover .icon-box::before {
+  transform: scale(1.2);
+}
+
+.mocktest .item .icon-box img {
+  position: relative;
+  width: 100%;
+  max-width: 25px;
+  transition: all 0.3s ease-in-out;
+  z-index: 1;
+  animation: zoomInOut 3s ease-in-out infinite;
+}
+
+
+@keyframes zoomInOut {
+  0% {
+    transform: scale(0.9);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0.9);
+  }
+}
+
+.mocktest-card {
+  max-width: 322px;
+  width: 100%;
+  padding: 28px 20px 28px 38px;
+  background-color: rgb(232, 246, 255);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 12px;
+  margin-bottom: 72px;
+}
+
+.mocktest-card .icon {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background-color: rgb(58, 166, 235);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  z-index: 1;
+}
+
+.mocktest-card .icon:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--color2);
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  transform: scale(0);
+  transition: all 0.4s ease-in-out;
+  z-index: 0;
+}
+
+.mocktest-card:hover .icon::before {
+  transform: scale(1.2);
+}
+.mocktest-card .icon img {
+  position: relative;
+  width: 100%;
+  max-width: 45px;
+  transition: all 0.3s ease-in-out;
+  z-index: 1;
+  animation: zoomInOut 3s ease-in-out infinite;
+}
+
+.mocktest-card .content p {
+  max-width: 182px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0;
+}
+
+.type2{
+  background-color: rgb(237, 255, 234);
+    margin-right: 72px;
+}
+.type3{
+  background-color: rgb(237, 255, 234);
+    margin-left: 72px;
+}
+
+.whymock3 {
+  background: #f1c40f;
+  animation-delay: 0s;
+  transition: opacity 1s ease;
+  animation: fadeSwap 6s infinite;
+}
+
+.whymock4 {
+  background: #2ecc71;
+  animation-delay: 3s;
+  transition: opacity 1s ease;
+  animation: fadeSwap 6s infinite;
+}
+
+@keyframes fadeSwap {
+  0%, 45% {
+    opacity: 1;
+  }
+  50%, 95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.whymock3 {
+  background: #f1c40f;
+  z-index: 2;
+  animation-delay: 0s;
+}
+
+.whymock4 {
+  background: #2ecc71;
+  z-index: 1;
+  animation-delay: 3s;
+}
+
+@keyframes fadeSwap {
+  0%, 45% {
+    opacity: 1;
+  }
+  50%, 95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* card css */
+.mock-test-card {
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  padding: 20px;
+  gap: 20px;
+  transition: border 0.3s, transform 0.3s;
+  background-image: url('./img/mockcard-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+}
+
+
+.mock-test-card:hover {
+  border: none;
+  transform: translateY(-3px);
+}
+
+.mock-test-card .content-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mock-test-card .card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 12px;
+}
+
+
+.mock-test-card .explore-link {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #000;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.explore-link:hover .text-url{
+  color: var(--color1);
+  border-bottom: 1px solid var(--color1);
+}
+
+.mock-test-card .arrow-icon {
+  background: #f3f3f3;
+  border-radius: 50%;
+  margin-left: 10px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.mock-test-card .explore-link:hover .arrow-icon {
+  background: var(--color1);
+}
+
+.mock-test-card .explore-link:hover .arrow-icon svg {
+  stroke: #fff;
+  height: 20px;
+  width: 20px;
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 24px;
+  color: #302f2f;
+}
+.info-section .info-badge {
+  /* background: linear-gradient(45deg, #2b2326, #312b28); */
+  border: 1px solid #999;
+  border-radius: 12px;
+  padding: 4px 8px;
+  font-size: 0.9rem;
+  position: relative;
+  transition: all .3s ease;
+}
+
+
+.info-sectio:before .info-section{
+  background: linear-gradient(45deg, #c44276, #f3a183);
+  border-radius: 50px;
+  content: "";
+  display: block;
+  height: 45px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: all .3s ease;
+  width: 100%;
+  z-index: -1;
+}
+
+.mock-test-card{
+   position: relative;
+}

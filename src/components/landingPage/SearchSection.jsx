@@ -51,7 +51,7 @@ function SearchSection({ data }) {
         <>
             <section className=''>
                 <div className="container-fluid bg-light-grey-blue">
-                    <div className="row gy-3">
+                    <div className="row gy-4">
                         <div className="col-xl-12">
                             <div className="card border-0 bg-light-grey-blue p-md-5 p-3 rounded-0">
                                 <div className="row gy-md-4 gy-3">
@@ -60,7 +60,7 @@ function SearchSection({ data }) {
                                             <div className='deco-img d-none d-md-block'>
                                                 <img src={DecorationImg} alt="icon" />
                                             </div>
-                                            <h1 className='mb-2 fw-bold'>Explore Courses at QuadNut</h1>
+                                            <h1 className='mb-2 fw-bold'>Explore Courses</h1>
                                         </div>
                                         {/* <h3>Together at QuadNut</h3> */}
                                         {/* <p className="mb-0 search-txt-13px">Choose among 1000+ programs</p> */}

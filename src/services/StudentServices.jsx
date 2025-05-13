@@ -1084,7 +1084,7 @@ export async function StudenStreakDataService(data) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      params:{
+      params: {
         year: data?.year
       }
     }
@@ -1106,7 +1106,68 @@ export async function AddVideoReviewService(data, callback) {
       onUploadProgress: (progressEvent) => {
         const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
         callback(progress);
-    },
+      },
+    }
+  );
+  return await response.data;
+}
+
+/********************************** Student Coins Services ********************/
+export async function StudentCoinsBalanceService() {
+  const token = Cookies.get(AuthType + "-accessToken");
+  const response = await axios.get(
+    `${BaseUrl}student/get-coins-bal`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      }
+    }
+  );
+  return await response.data;
+}
+
+export async function CourseCompletionCoinsTransferService(id) {
+  const token = Cookies.get(AuthType + "-accessToken");
+  const response = await axios.get(
+    `${BaseUrl}student/course-completion-coins/${id}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      }
+    }
+  );
+  return await response.data;
+}
+
+export async function CoinsTxnListService(data) {
+  const token = Cookies.get(AuthType + "-accessToken");
+  const response = await axios.get(
+    `${BaseUrl}student/coin-txn-list`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      params: {
+        limit: data?.limit ?? 10,
+        page: data?.page ?? 1
+      }
+    }
+  );
+  return await response.data;
+}
+
+export async function GetVideoReviewList() {
+  const companyString = Cookies.get("company-info")
+  const companyData = JSON.parse(base64.decode(companyString));
+  const response = await axios.get(
+    `${BaseUrl}student/featured-video-review-list/${companyData?.affiliate_id}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      }
     }
   );
   return await response.data;

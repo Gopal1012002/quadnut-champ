@@ -10,7 +10,9 @@ function HeaderStrip({ companyData, student, logout }) {
         <div className="container-fluid px-3">
           <div className="d-flex  justify-content-between align-items-center">
             <div>
-              <p className='mb-0 fs-14 fw-600 clickable-btn' onClick={()=>navigate('/')}> Home</p>
+
+              {/* <p className='mb-0 fs-14 fw-600 ' onClick={()=>navigate('/')}> Home</p> */}
+
             </div>
 
             {

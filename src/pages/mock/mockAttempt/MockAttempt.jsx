@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { FaRegCheckCircle } from 'react-icons/fa'
 import { GetMockQuestions, MockAttemptLogServices, SubmitMockTestService } from '../../../services/StudentServices';
@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 import { toast } from 'react-toastify';
 
 const MockAttempt = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const { id, slug } = useParams();
   const [token, setToken] = useState(Cookies.get(`mock-${id}`));
   const [isLoading, setLoading] = useState(false);
@@ -28,7 +29,23 @@ const MockAttempt = () => {
   const [mockStartTime, setMockStartTime] = useState();
   const [textResponse, setTextReponse] = useState();
   const navigate = useNavigate();
+  const answersRef = useRef(answers);
+  const mockDetailsRef = useRef(mockDetails);
+  const mockStartTimeRef = useRef(mockStartTime);
+
+  useEffect(() => {
+    answersRef.current = answers;
+  }, [answers]);
   
+  useEffect(() => {
+    mockDetailsRef.current = mockDetails;
+  }, [mockDetails]);
+
+  useEffect(() => {
+    mockStartTimeRef.current = mockStartTime;
+  }, [mockStartTime]);
+  
+
 
   const [isFullScreen, setIsFullScreen] = useState(false);
   const enterFullScreen = () => {
@@ -47,18 +64,18 @@ const MockAttempt = () => {
       }
     } catch (error) {
       console.log(error);
-      
+
     }
 
   };
-  
+
   const submitMockTestLog = () => {
-    
-    if(currentQuestion?.questionType === 'SINGLE' || currentQuestion?.questionType ===  'MULTIPLE'){
+
+    if (currentQuestion?.questionType === 'SINGLE' || currentQuestion?.questionType === 'MULTIPLE') {
       const data = {
-        mockTestId:id,
+        mockTestId: id,
         token,
-        questionId:currentQuestion?.questionId,
+        questionId: currentQuestion?.questionId,
         questionTitle: currentQuestion?.questionTitle,
         questionType: currentQuestion?.questionType,
         questionGrade: currentQuestion?.questionGrade,
@@ -69,19 +86,19 @@ const MockAttempt = () => {
         totalGrade
       }
 
-      MockAttemptLogServices(data).then((res)=>{
+      MockAttemptLogServices(data).then((res) => {
         console.log(res?.message)
-      }).catch((err)=>{
+      }).catch((err) => {
         console.log(err)
-      }).finally(()=>{
+      }).finally(() => {
 
       })
-    }else{
+    } else {
       // setTextReponse()
       const data = {
-        mockTestId:id,
+        mockTestId: id,
         token,
-        questionId:currentQuestion?.questionId,
+        questionId: currentQuestion?.questionId,
         questionTitle: currentQuestion?.questionTitle,
         questionType: currentQuestion?.questionType,
         questionGrade: currentQuestion?.questionGrade,
@@ -96,46 +113,46 @@ const MockAttempt = () => {
   }
 
   const submitMockTestTextLog = (data) => {
-      MockAttemptLogServices(data).then((res)=>{
-        console.log(res?.message)
-      }).catch((err)=>{
-        console.log(err)
-      }).finally(()=>{
-        setTextReponse(false)
-      })
-    }
-  
+    MockAttemptLogServices(data).then((res) => {
+      console.log(res?.message)
+    }).catch((err) => {
+      console.log(err)
+    }).finally(() => {
+      setTextReponse(false)
+    })
+  }
 
-  useEffect(()=>{
+
+  useEffect(() => {
     let cookieToken = Cookies.get(`mock-${id}`);
-    
-    if(!cookieToken) {
+
+    if (!cookieToken) {
       Swal.fire({
         title: 'Invalid Mock Attempt!!',
         text: 'Token respective to this mock attempt is not found.',
         icon: "warning",
       }).then((res) => {
         if (res?.isConfirmed) {
-          if(document.fullscreenElement){
+          if (document.fullscreenElement) {
             document.exitFullscreen();
           }
           navigate(`/mock-details/${slug}`)
-        }else{
-          if(document.fullscreenElement){
+        } else {
+          if (document.fullscreenElement) {
             document.exitFullscreen();
           }
           navigate(`/mock-details/${slug}`)
         }
-      }).finally(()=>{
-        if(document.fullscreenElement){
+      }).finally(() => {
+        if (document.fullscreenElement) {
           document.exitFullscreen();
         }
         navigate(`/mock-details/${slug}`)
       })
-    }else{
+    } else {
       Cookies.remove(`mock-${id}`);
     }
-  },[])
+  }, [])
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {
@@ -157,9 +174,9 @@ const MockAttempt = () => {
       try {
         enterFullScreen();
       } catch (error) {
-        
+
       }
-      
+
     } else {
       navigate(`/mock-details/${slug}`);
     }
@@ -232,7 +249,7 @@ const MockAttempt = () => {
       }
       setCurrentQuestion(answers[current - 1]);
       setCurrent(current - 1);
-      if(textResponse){
+      if (textResponse) {
         submitMockTestTextLog(textResponse);
       }
     }
@@ -248,12 +265,12 @@ const MockAttempt = () => {
       }
       setCurrentQuestion(answers[current + 1]);
       setCurrent(current + 1)
-      if(textResponse){
+      if (textResponse) {
         submitMockTestTextLog(textResponse);
       }
       return;
     }
-    if(textResponse){
+    if (textResponse) {
       submitMockTestTextLog(textResponse);
     }
     if (current < (answers?.length - 1)) {
@@ -267,16 +284,18 @@ const MockAttempt = () => {
       setCurrent(current + 1)
     }
   }
-
   const onSubmitMockTest = () => {
+
+
     let endTime = new Date();
     const bodyData = {
-      mockData: mockDetails?.mockDetails,
-      answers: JSON.stringify(answers),
+      mockData: mockDetails?.mockDetails ?? mockDetailsRef.current?.mockDetails,
+      answers: JSON.stringify(answers) ?? JSON.stringify(answersRef.current),
       token,
-      mockAttemptStartTime: mockStartTime,
+      mockAttemptStartTime: mockStartTime ?? mockStartTimeRef.current,
       mockAttemptEndTime: endTime
     }
+
     setLoading(true);
     SubmitMockTestService(bodyData).then((res) => {
       if (res.statusCode === 201) {
@@ -286,7 +305,7 @@ const MockAttempt = () => {
           icon: "success",
         }).then((res) => {
           if (res?.isConfirmed) {
-            if(document.fullscreenElement){
+            if (document.fullscreenElement) {
               document.exitFullscreen();
             }
             navigate(`/mock-details/${slug}`)
@@ -300,17 +319,61 @@ const MockAttempt = () => {
 
     }).catch((err) => {
       toast.error(err?.response?.data?.message);
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      }
+      navigate(`/mock-details/${slug}`)
       // document.exitFullscreen();
     }).finally(() => {
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      }
+      navigate(`/mock-details/${slug}`)
       setLoading(false);
       // document.exitFullscreen();
     })
   }
 
 
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        // Auto submit or pause exam here
+        Swal.fire({
+          title: 'Tab Switched!!',
+          text: 'You switched tabs! Your exam will be submitted.',
+          icon: "warning",
+        }).then((res) => {
+          if (res?.isConfirmed) {
+            if (document.fullscreenElement) {
+              document.exitFullscreen();
+            }
+            onSubmitMockTest();
+          } else {
+            if (document.fullscreenElement) {
+              document.exitFullscreen();
+            }
+            onSubmitMockTest();
+          }
+        }).finally(() => {
+          if (document.fullscreenElement) {
+            document.exitFullscreen();
+          }
+          onSubmitMockTest();
+        })
+        // You can also call a function to submit the exam here
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
 
   const askToSubmitMock = () => {
-    if(textResponse){
+    if (textResponse) {
       submitMockTestTextLog(textResponse);
     }
     Swal.fire({
@@ -330,7 +393,7 @@ const MockAttempt = () => {
 
   const selectQuestion = (index) => {
     if (mockType === 'SPECIFIC') {
-      if(textResponse){
+      if (textResponse) {
         submitMockTestTextLog(textResponse);
       }
       return;
@@ -345,7 +408,7 @@ const MockAttempt = () => {
     }
     setCurrent(index);
     setCurrentQuestion(answers[index]);
-    if(textResponse){
+    if (textResponse) {
       submitMockTestTextLog(textResponse);
     }
   }
@@ -380,13 +443,6 @@ const MockAttempt = () => {
     setAnswers([...dummyAnswerArray]);
     setCurrentQuestion(dummyAnswerArray[current])
   }
-
-  const handleExitFullScreen = () => {
-    onSubmitMockTest();
-    // Call your function here
-  };
-
-
 
   useEffect(() => {
 

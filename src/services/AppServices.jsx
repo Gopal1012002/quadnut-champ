@@ -12,8 +12,8 @@ const BaseUrl = conf.apiBaseUrl;
 
 export async function getAppConfig(domain) {
     // const response = await axios.get(`${BaseUrl}user/front/config/${'www.startupify.co.in'}`,
-    const response = await axios.get(`${BaseUrl}user/front/config/${'www.champ.quadnut.org'}`,
-      // const response = await axios.get(`${BaseUrl}user/front/config/${domain}`,
+    const response = await axios.get(`${BaseUrl}user/front/config/${'www.quadnut.org'}`,
+    //   const response = await axios.get(`${BaseUrl}user/front/config/${domain}`,
   //  const response = await axios.get(`${BaseUrl}user/front/config/${'www.getyourlms.com'}`,
         {
             headers: {
@@ -211,6 +211,21 @@ export async function GetCategoryHierarchy() {
   return await response.data;
 }
 
+
+export async function GetParentCategoryList() {
+    const companyString = Cookies.get("company-info")
+    const companyData = JSON.parse(base64.decode(companyString));
+    const response = await axios.get(`${BaseUrl}user/front/parent-category/${companyData?.affiliate_id}`,
+        {
+            headers: {
+                "Content-Type": "application/json"
+            },
+        }
+    );
+    return await response.data;
+  }
+  
+
 export async function GetSegmentHierarchy() {
   const companyString = Cookies.get("company-info")
   const companyData = JSON.parse(base64.decode(companyString));
@@ -315,3 +330,51 @@ export async function GetTnCPage() {
   );
   return await response.data;
 }
+
+
+export async function GetScholarshipListService() {
+    const companyString = Cookies.get("company-info")
+    const companyData = JSON.parse(base64.decode(companyString));
+    const response = await axios.get(`${BaseUrl}user/front/active-scholarship-list/${companyData?.affiliate_id}`,
+        {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+    );
+    return await response.data;
+  }
+
+  
+export async function GetScholarshipListBySlug(slug) {
+    const companyString = Cookies.get("company-info")
+    const companyData = JSON.parse(base64.decode(companyString));
+    const response = await axios.get(`${BaseUrl}user/front/active-scholarship/${companyData?.affiliate_id}/${slug}`,
+        {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+    );
+    return await response.data;
+  }
+
+/********************************** Mock Test List ***********************/
+export async function GetMockTestList(data) {
+    const companyString = Cookies.get("company-info")
+    const companyData = JSON.parse(base64.decode(companyString));
+    const response = await axios.get(`${BaseUrl}user/front/active-mock-list/${companyData?.affiliate_id}`,
+        {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            params:{
+                page: data?.page ?? 1,
+                limit: data?.limit ?? 6,
+                type: data?.type,
+                keyword:data?.keyword
+            }
+        }
+    );
+    return await response.data;
+  }

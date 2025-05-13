@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useAuthCompany } from "../../../services/AppServices";
 
-const Head = ({ title, description }) => {
-  const [dTitle, setDTitle] = useState("AW Learning Management System");
+const Head = ({ title = "QuadNut", description }) => {
+  const [dTitle, setDTitle] = useState("QuadNut");
   const { companyData } = useAuthCompany();
   useEffect(() => {
     if (companyData?.websiteName) {
       setDTitle(companyData.websiteName);
     }
-  }, [companyData]); // Added dependency array for proper effect handling
+  }, [companyData]); 
 
   return (
     <Helmet>

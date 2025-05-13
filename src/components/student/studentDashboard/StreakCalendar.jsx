@@ -35,15 +35,14 @@ const StreakCalendar = () => {
         <div className="card dash-info flex-fill">
             {
                 !streakLoading && streakData ? <div className="card dash-info flex-fill">
-                    <div className="card-body text-center">
-                        <div className="streak-dashboard">
+                    <div className="card-body p-0 text-center">
+                        <div className="streak-dashboard m-0">
                             <div className="streak-header">
-                                <h5>📅 {student?.name}'s Streak</h5>
-                                <div className="streak-metrics d-flex flex-row align-items-center">
+                                <h5 className='d-none d-md-block'>📅 {student?.name}'s Streak</h5>
+                                <div className="streak-metrics d-flex flex-row align-items-center justify-content-between">
                                     <span>🔥 Current Streak: <strong>{streakData?.streakDetails.currentStreak ?? 0}</strong></span>
                                     <span>🏆 Max Streak: <strong>{streakData?.streakDetails.maxStreak ?? 0}</strong></span>
-                                    <span>
-                                        {/* Use Controller to manage RSelect for package_type */}
+                                    <span className='d-none d-md-block'>
                                         <RSelect
                                             options={years}
                                             onChange={(selectedOption) => setSelectedYear(selectedOption)}

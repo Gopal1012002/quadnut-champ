@@ -4643,9 +4643,9 @@ html.menu-opened body {
   position: relative;
 }
 .user-img > img {
-  height: 50px;
+  height: 40px;
   object-fit: cover;
-  width: 50px;
+  width: 40px;
   border-radius: 50%;
   border: 3px solid #e0e0e0;
 }
@@ -13185,7 +13185,7 @@ input[type="password"]::-ms-clear {
 }
 .page-content {
   background: #fafafa;
-  padding: 60px 0 60px;
+  padding: 0 0 60px;
 }
 .instructor-page-content {
   padding: 60px 0 30px;
@@ -24898,7 +24898,7 @@ color: #B9B7C0 ;
     padding: 40px 0;
   }
   .page-content {
-    padding: 50px 0 30px;
+    padding: 0px 0 30px;
   }
   .sup-title {
     margin-bottom: 0px;

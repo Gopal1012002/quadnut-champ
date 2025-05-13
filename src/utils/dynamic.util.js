@@ -36,6 +36,34 @@ export const formattedMinuteToHrs = (minutes) => {
   
 }
 
+export const formatDateRank = (dateString) => {
+  const date = new Date(dateString);
+
+  const day = date.getDate();
+  const dayWithSuffix =
+    day + (day % 10 === 1 && day !== 11 ? 'st' : day % 10 === 2 && day !== 12 ? 'nd' : day % 10 === 3 && day !== 13 ? 'rd' : 'th');
+
+  const month = date.toLocaleString('default', { month: 'long' });
+  const year = date.getFullYear();
+
+  return `${dayWithSuffix} ${month}, ${year}`;
+};
+
+export const formatTimeRank = (dateString) => {
+  const date = new Date(dateString);
+
+  let hours = date.getHours();
+  const minutes = date.getMinutes();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+
+  hours = hours % 12;
+  hours = hours ? hours : 12; // if 0 then 12
+
+  const minutesStr = minutes < 10 ? '0' + minutes : minutes;
+
+  return `${hours}:${minutesStr} ${ampm}`;
+};
+
 export function getLastThreeYears() {
   const currentYear = new Date().getFullYear();
   return [currentYear, currentYear - 1, currentYear - 2];

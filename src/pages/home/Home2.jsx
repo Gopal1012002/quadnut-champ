@@ -21,22 +21,17 @@ import WhatQuadnut from '../../components/landingPage/WhatQuadnut';
 import VideoTestimonialForm from '../../components/landingPage/VideoTestimonialForm';
 
 
-
-
-
-
-
 const Home2 = () => {
   const { student } = AuthStudent();
   return (
     <>
-      <Head title={'QuadNut Champ - a comprehensive LMS'} />
+      <Head title={'QuadNut - Learning Management System'} />
       <Hero />
       <SearchSection />
-      <WhatQuadnut />
+      {/* <WhatQuadnut /> */}
       <Features />
       <JoinFamily />
-      <BookSession />
+      {/* <BookSession /> */}
       <TrendsCourse />
       <StudyResource />
       <TestimonialSection />

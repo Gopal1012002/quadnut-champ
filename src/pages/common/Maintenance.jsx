@@ -2,7 +2,7 @@ import React from 'react'
 import styles from '../../assets/css/Maintenance.module.css';
 
 const Maintenance = () => {
-    return (
+    return ( 
         <div className={styles.maintenance}>
             <div className={styles.spinner}></div>
             {/* <h1>Maintenance Mode</h1>
