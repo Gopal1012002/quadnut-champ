@@ -13,7 +13,7 @@ function WhatQuadnut() {
     }, []);
     return (
         <>
-            <section className='pt-md-5'>
+            <section className='py-md-5'>
                 <div className="container">
                     <div className="row">
                         <div className="col-md-4 px-0">

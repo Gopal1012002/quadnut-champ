@@ -19,6 +19,9 @@ import SearchSection from '../../components/landingPage/SearchSection';
 import BookSession from '../../components/landingPage/BookSession';
 import WhatQuadnut from '../../components/landingPage/WhatQuadnut';
 import VideoTestimonialForm from '../../components/landingPage/VideoTestimonialForm';
+import ChampAboutus from '../../components/landingPage/ChampAboutus';
+import IntoVideo from '../../components/landingPage/IntoVideo';
+import ChampkeyFeatures from '../../components/landingPage/ChampkeyFeatures';
 
 
 const Home2 = () => {
@@ -27,14 +30,17 @@ const Home2 = () => {
     <>
       <Head title={'QuadNut - Learning Management System'} />
       <Hero />
-      <SearchSection />
-      {/* <WhatQuadnut /> */}
-      <Features />
-      <JoinFamily />
+      {/* <SearchSection /> */}
+      <WhatQuadnut />
+      <ChampAboutus />
+      <IntoVideo />
+      <ChampkeyFeatures />
+      {/* <Features /> */}
+      {/* <JoinFamily /> */}
       {/* <BookSession /> */}
-      <TrendsCourse />
-      <StudyResource />
-      <TestimonialSection />
+      {/* <TrendsCourse /> */}
+      {/* <StudyResource /> */}
+      {/* <TestimonialSection /> */}
       {
         student && <VideoTestimonialForm />
       }

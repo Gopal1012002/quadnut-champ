@@ -12,7 +12,7 @@ const BaseUrl = conf.apiBaseUrl;
 
 export async function getAppConfig(domain) {
     // const response = await axios.get(`${BaseUrl}user/front/config/${'www.startupify.co.in'}`,
-    const response = await axios.get(`${BaseUrl}user/front/config/${'www.quadnut.org'}`,
+    const response = await axios.get(`${BaseUrl}user/front/config/${'www.champ.quadnut.org'}`,
     //   const response = await axios.get(`${BaseUrl}user/front/config/${domain}`,
   //  const response = await axios.get(`${BaseUrl}user/front/config/${'www.getyourlms.com'}`,
         {

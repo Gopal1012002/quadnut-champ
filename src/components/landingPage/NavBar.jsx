@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import quadNutLogo from '../../assets/img/quadnut.png'
-import champLogo from '../../assets/img/landing-page/champ.png';
+import quadNutLogo from '../../assets/img/quad-champs/logo.png'
+import champLogo from '../../assets/img/quad-champs/logo.png';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Goal from '../../../src/assets/img/landing-page/menu.png'
-import Scholarship from '../../../src/assets/img/landing-page/scholarship.png'
-import Skill from '../../../src/assets/img/landing-page/leadership.png'
-import MockTest from '../../../src/assets/img/landing-page/exam.png'
-import Store from '../../../src/assets/img/landing-page/book-shop.png'
-import SuccessStories from '../../../src/assets/img/landing-page/success-story.png'
+import NavImg1 from '../../assets/img/quad-champs/nav-img1.png'
+import NavImg2 from '../../../src/assets/img/quad-champs/nav-img2.png'
+import NavImg3 from '../../../src/assets/img/quad-champs/nav-img3.png'
+import NavImg4 from '../../../src/assets/img/quad-champs/nav-img4.png'
+import NavImg5 from '../../../src/assets/img/quad-champs/nav-img5.png'
+import NavImg6 from '../../../src/assets/img/quad-champs/nav-img6.png'
 import user16 from "../../assets/img/user/user16.png";
 import AuthStudent from '../../services/StudentServices';
 import conf from '../../conf/conf';
@@ -123,10 +124,10 @@ function NavBar() {
           <Navbar expand="xl" className="py-2">
             <Navbar.Brand className='m-0' >
               <div className='d-flex justify-content-center align-items-center'>
-                <div className="logo-home-2">
-                  <img src={`${urlPrefix}/favicon/${companyData?.favicon}`} alt="QuadNut Logo" />
+                <div className="champ-logo">
+                  <img src={champLogo} alt="QuadNut Logo" />
                 </div>
-                <p className="quadnut-title mb-0 clickable-btn" onClick={() => navigate('/')}>{companyData?.websiteName}</p>
+                
               </div>
 
             </Navbar.Brand>
@@ -216,9 +217,9 @@ function NavBar() {
             }
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="mx-auto pt-3 pt-xl-0">
+              <Nav className="ms-auto pt-3 pt-xl-0">
                 <ul className="nav-links menu">
-                  <li className='divider'><Link to="/course-list" > <span><img src={Goal} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>Explore Courses</span></Link>
+                  <li className='divider'><Link to="/" > <span><img src={Goal} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>Categories</span></Link>
                     <ul className="submenu  card shadow-sm rounded-2 py-2">
                       {location?.pathname == "/up-skilling" ? 
                       categoryTree?.map((parent, index)=>{
@@ -232,53 +233,54 @@ function NavBar() {
 
                       <li>
                         <Link to="" >
-                          QuadNut Pro
+                        School Preparation
                         </Link>
-                        <ul className="submenu  card shadow-sm rounded-2 py-2">
+                        {/* <ul className="submenu  card shadow-sm rounded-2 py-2">
                           <li><Link to={`/training`} className='sub-menu-items'>Training</Link></li>
                           <li><Link to={`/up-skilling`} className='sub-menu-items'>Upskilling</Link></li>
-                        </ul>
+                        </ul> */}
                       </li>
                       <li>
                         <Link to="" >
-                          IIT JEE / NEET
+                      Foundation
                         </Link>
-                        <ul className="submenu  card shadow-sm rounded-2 py-2">
+                        {/* <ul className="submenu  card shadow-sm rounded-2 py-2">
                           <li><a target='_blank' href={`https://champ.quadnut.org`} className='sub-menu-items'>JEE Mains</a></li>
                           <li><a target='_blank' href={`https://champ.quadnut.org`} className='sub-menu-items'>JEE ADVANCED</a></li>
                           <li><a target='_blank' href={`https://champ.quadnut.org`} className='sub-menu-items'>NEET UG</a></li>
-                        </ul>
+                        </ul> */}
                       </li>
                       <li>
                         <Link to="" >
-                          Government Exam
+                         STEM Learning
                         </Link>
-                        <ul className="submenu  card shadow-sm rounded-2 py-2">
+                        {/* <ul className="submenu  card shadow-sm rounded-2 py-2">
                           <li><a target='_blank' href={`https://champ.quadnut.org`} className='sub-menu-items'>Banking</a></li>
                           <li><a target='_blank' href={`https://champ.quadnut.org`} className='sub-menu-items'>SSC</a></li>
                           <li><a target='_blank' href={`https://champ.quadnut.org`} className='sub-menu-items'>Railways</a></li>
-                        </ul>
+                        </ul> */}
                       </li>
-                      <li><a target='_blank' href={`https://champ.quadnut.org`} className='sub-menu-items'>QuadNut Champs</a></li>            
+                      <li><Link to="/" className='sub-menu-items text-nowrap'>Practical Based Learning</Link></li> 
+                       <li><Link to="/" className='sub-menu-items'>Olympiads</Link></li>           
                       </>
                     }</ul>
                   </li>
 
-                  <li className='divider'><Link to="/about-us" > <span><img src={Skill} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>About Us</span></Link >
-                    <ul className="submenu  card shadow-sm rounded-2 py-2">
+                  <li className='divider'><Link to="/" > <span><img src={NavImg1} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>About Us</span></Link >
+                    {/* <ul className="submenu  card shadow-sm rounded-2 py-2">
                       <li><Link to={"/expertise"}>Our Expertise</Link></li>
                       <li><Link to={"/quality"}>Commitment to Quality</Link></li>
                       <li><Link to={"/track-record"}>Our Track Record</Link></li>
                       <li ><Link to={'testimonials-success'} className='text-nowrap'>Testimonials of Success</Link></li>
 
-                    </ul>
+                    </ul> */}
 
                   </li>
-                  <li className='divider'><a href="https://champ.quadnut.org/" target='_blank'> <span><img src={quadNutLogo} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>QuadNut Champs</span></a></li>
-                  <li className='divider'><Link to="/scholarship"> <span><img src={Scholarship} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>Scholarship</span></Link></li>
-                  <li className='divider'><Link to="/mock-tests"> <span><img src={MockTest} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>Mock Tests</span></Link></li>
-                  <li className='divider'><Link to="/course-list"> <span><img src={Store} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>QuadNut Store</span></Link></li>
-                  <li className='divider'><Link to="/success-stories"> <span><img src={SuccessStories} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>Success Stories</span></Link></li>
+                  <li className='divider'><Link to="/"><span><img src={NavImg2} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>Live Tuition Classes</span></Link></li>
+                  <li className='divider'><Link to="/"> <span><img src={NavImg3} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>Recorded Courses</span></Link></li>
+                  <li className='divider'><Link to="/"> <span><img src={NavImg4} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>Blog</span></Link></li>
+                  <li className='divider'><Link to="/"> <span><img src={NavImg6} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>Testimonials</span></Link></li>
+                  <li className='divider'><Link to="/"> <span><img src={NavImg5} className='img-fluid me-1 nav-img' /></span><span className='vertical-bottom fs-14 nav-r-txt underline-animation'>Contact Us</span></Link></li>
 
                 </ul>
               </Nav>
