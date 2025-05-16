@@ -211,6 +211,20 @@
   }
 }
 
+.flip {
+  animation: flip 3s infinite alternate ease-in-out;
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateY(0deg);
+  }
+
+  100% {
+    transform: rotateY(-180deg);
+  }
+}
+
 /* image hover effect */
 .hover-effect-img {
   position: relative;
@@ -583,9 +597,10 @@
     line-height: 45px;
   }
 }
+
 @media screen and (min-width: 1024px) and (max-width: 1398px) {
   .champ-hero-content h1 {
-      font-size: 40px;
+    font-size: 40px;
     line-height: 55px;
   }
 }
@@ -603,7 +618,7 @@
 }
 
 .hero-img-section .hero-main-img {
-  width: 470px;
+  width: 520px;
 }
 
 .champ-hero-shape1 {
@@ -835,10 +850,10 @@
 }
 
 @media screen and (max-width: 1024px) {
-.features-box {
-  flex-direction: column;
+  .features-box {
+    flex-direction: column;
 
-}
+  }
 }
 
 .features-img {
@@ -872,6 +887,176 @@
   /* z-index: -1; */
 
 }
+
+/*--------------------------------------------------------------
+# testimoanial
+--------------------------------------------------------------*/
+.champ-testimonial {
+  padding-top: 110px;
+  padding-bottom: 110px;
+}
+
+@media screen and (max-width: 990px) {
+  .champ-testimonial {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+}
+
+.test-img {
+  position: absolute;
+  bottom: -23%;
+  right: 0%;
+  z-index: 99999;
+}
+
+.testi-shape1 {
+  position: absolute;
+  right: 20%;
+  top: 15%;
+}
+
+.testi-shape2 {
+  position: absolute;
+  left: 20%;
+  bottom: -15%;
+  z-index: 1;
+}
+
+@media screen and (max-width: 767px) {
+  .testi-shape2 {
+    left: 5%;
+  }
+
+  .testi-shape2 img {
+    width: 66px;
+  }
+}
+
+.champ-testimonial-card {
+  padding: 40px 40px 45px;
+  margin-bottom: 25px;
+  border-radius: 20px;
+  background-color: rgba(253, 247, 243, 0.8);
+}
+
+.champ-testi-profile-box {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border: 1px dotted var(--primary-color-500);
+}
+
+.test-img {
+  width: 550px;
+}
+
+@media screen and (max-width: 767px) {
+  .test-img {
+    width: 300px;
+  }
+}
+@media screen and (min-width: 1024px) and (max-width: 1200px) {
+  .test-img {
+    width: 441px;
+  }
+}
+
+/*--------------------------------------------------------------
+# champ blog
+--------------------------------------------------------------*/
+
+.champ-blog {
+  background-image: url('../img/quad-champs/into-video/event-bg4.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 145px 0px;
+
+}
+.champ-blog-card {
+  border-radius: 20px;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+  transition: 0.5s;
+  padding: 25px 25px 35px;
+  overflow: hidden;
+}
+
+.blog-date span {
+  display: inline-block;
+  font-size: 14px;
+  color: var(--primary-color-500);
+  font-weight: 500;
+  border-radius: 16px;
+  background-color: #ffffff;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  padding: 2px 18px;
+}
+
+.blog-post-profile {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.blog-btn a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  line-height: 30px;
+  color: var(--tertiary-color);
+  font-weight: 500;
+  font-family: "Outfit";
+  border-radius: 25px;
+  background-color: rgba(21, 193, 250, 0.10196078431372549);
+  border: 1px solid rgba(21, 193, 250, 0.3);
+  padding: 8px 17px 8px 30px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+  transition: 0.5s;
+}
+
+.blog-btn a::before {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background: var(--btn-bg-color);
+  border-radius: 30px;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  transition: .5s;
+  clip-path: polygon(50% 0, 50% 0, 50% 50%, 50% 100%, 50% 100%, 50% 50%);
+  z-index: -1;
+}
+
+.blog-btn a:hover {
+  color: #ffffff;
+}
+
+.blog-btn a:hover::before {
+  clip-path: polygon(25% -70%, 75% -70%, 120% 50%, 75% 170%, 25% 170%, -20% 50%);
+}
+
+.blog-btn a:hover img {
+  filter: brightness(0) invert(1);
+}
+
 
 
 
@@ -2471,5 +2656,4 @@ p.feature-desc {
 
 .video-play-btn img {
   width: 45px;
-
 }
