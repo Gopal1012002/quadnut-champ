@@ -22,6 +22,8 @@ import VideoTestimonialForm from '../../components/landingPage/VideoTestimonialF
 import ChampAboutus from '../../components/landingPage/ChampAboutus';
 import IntoVideo from '../../components/landingPage/IntoVideo';
 import ChampkeyFeatures from '../../components/landingPage/ChampkeyFeatures';
+import ChampTestimonial from '../../components/landingPage/ChampTestimonial';
+import ChampBlog from '../../components/landingPage/ChampBlog';
 
 
 const Home2 = () => {
@@ -35,6 +37,8 @@ const Home2 = () => {
       <ChampAboutus />
       <IntoVideo />
       <ChampkeyFeatures />
+      <ChampTestimonial/>
+      <ChampBlog/>
       {/* <Features /> */}
       {/* <JoinFamily /> */}
       {/* <BookSession /> */}

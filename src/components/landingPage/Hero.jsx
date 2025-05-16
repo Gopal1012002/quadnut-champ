@@ -1,59 +1,97 @@
-import React from 'react'
-import Carousel from 'react-bootstrap/Carousel';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import BtnImg from '../../../src/assets/img/quad-champs/button-img/book-icon.png'
-import HeroImg from '../../../src/assets/img/quad-champs/hero-section/hero-main-img.png'
-import Heroshape1 from '../../../src/assets/img/quad-champs/hero-section/hero-shape-1.png'
-import Heroshape2 from '../../../src/assets/img/quad-champs/hero-section/hero-shape-5.png'
-import Heroshape3 from '../../../src/assets/img/quad-champs/hero-section/hero-shape-2.png'
-import Heroshape4 from '../../../src/assets/img/quad-champs/hero-section/hero-shape-4.png'
+import React, { useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, EffectFade } from 'swiper/modules';
 
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
+import 'animate.css';
 
+import HeroSection from './HeroSection';
 
-function Hero() {
+// Assets
+import BtnImg from '../../../src/assets/img/quad-champs/button-img/book-icon.png';
+import HeroImg from '../../../src/assets/img/quad-champs/hero-section/hero-main-img.png';
+// import HeroImg1 from '../../../src/assets/img/quad-champs/hero-section/hero-img1.png';
+// import HeroImg2 from '../../../src/assets/img/quad-champs/hero-section/hero-img2.png';
+// import HeroImg3 from '../../../src/assets/img/quad-champs/hero-section/hero-img3.png';
+// import HeroImg4 from '../../../src/assets/img/quad-champs/hero-section/hero-img4.png';
+// import HeroImg5 from '../../../src/assets/img/quad-champs/hero-section/hero-img5.png';
+import Heroshape1 from '../../../src/assets/img/quad-champs/hero-section/hero-shape-1.png';
+import Heroshape2 from '../../../src/assets/img/quad-champs/hero-section/hero-shape-5.png';
+import Heroshape3 from '../../../src/assets/img/quad-champs/hero-section/hero-shape-2.png';
+import Heroshape4 from '../../../src/assets/img/quad-champs/hero-section/hero-shape-4.png';
+import BlogImg1 from '../../../src/assets/img/quad-champs/into-video/blog-img1png.png'
+import BlogImg2 from '../../../src/assets/img/quad-champs/into-video/blog-img2.png'
+import BlogImg3 from '../../../src/assets/img/quad-champs/into-video/blog-img3.png'
+
+// Slide content
+const heroData = [
+  {
+    title: "Strong Foundations, Bright Futures – From 3rd to 8th Grade.",
+    description: "Lay the foundation for future success",
+    img: HeroImg,
+  },
+  {
+    title: "Solid foundations for IIT-JEE,  NEET, and beyond.",
+    description: "Prepare for a strong academic future.",
+    img: HeroImg,
+  },
+  {
+    title: "Achieve excellence  in competitive exams",
+    description: "Achieve excellence in competitive exams",
+    img: HeroImg,
+  },
+  {
+    title: "Explore the world  of Science, Technology, Engineering, and Math.",
+    description: "Discover the world of Science, Technology, Engineering, and Mathematics",
+    img: HeroImg,
+  },
+  {
+    title: "Where knowledge meets real-world application",
+    description: "Hands-on learning for real-world applications",
+    img: HeroImg,
+  },
+  {
+    title: "Challenge Limits. Master Concepts. Win Olympiads",
+    description: "Excel in national and international Olympiad exams.",
+    img: HeroImg,
+  },
+];
+
+const HeroCarousel = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
   return (
-    <>
-      {/* hero-section */}
-      <section className='champs-hero'>
-        <div className="container">
-          <div className="row align-items-center">
-            <div className="col-lg-7">
-              <div className='champ-hero-content position-relative  '>
-                <div className='champ-hero-shape3'>
-                  <img src={Heroshape3} alt="icon" className='float ' />
-                </div>
-                <h1 className='text-center text-lg-start'>Empowering Students <br />from 3rd to 12th Grade with <br />Quality Education</h1>
-                <p className='text-center text-lg-start'>Brief description of QuadNut Champs and its offerings (Live tuition, Recorded courses, Olympiad training, etc.)</p>
-              </div>
-              <div className='w-100  d-flex justify-content-center justify-content-lg-start'>
-                  <div className='champ-common-btn '>
-                <Link to="/course-list"><span><img src={BtnImg} alt="immage" className='me-2' /></span><span className='btn-txt'>GET STARTED</span></Link>
-              </div>
-              </div>
-            
-            </div>
-            {/* hero image */}
-            <div className="col-lg-5 d-flex justify-content-center hero-img-section position-relative ">
-              <div className='champ-hero-shape1'>
-                <img src={Heroshape1} alt="icon" className='rotate-animation ' />
-              </div>
-              <div className='champ-hero-shape2'>
-                <img src={Heroshape2} alt="icon" className='left-right' />
-              </div>
-              <div className='champ-hero-shape4'>
-                <img src={Heroshape4} alt="icon" className='top-bottom' />
-              </div>
-              <img src={HeroImg} alt="image" className='img-fluid hero-main-img' />
-            </div>
-          </div>
-        </div>
+    <Swiper
+      modules={[Autoplay, EffectFade]}
+      autoplay={{ delay: 4000, disableOnInteraction: false }}
+      effect="fade"
+      loop={true}
+      slidesPerView={1}
+      speed={800}
+      onSlideChange={(swiper) => {
+        setActiveIndex(swiper.realIndex);
+      }}
+    >
+      {heroData.map((item, index) => (
+        <SwiperSlide key={index}>
+          <HeroSection
+            key={activeIndex === index ? `active-${index}` : `inactive-${index}`}
+            animate={activeIndex === index}
+            title={item.title}
+            description={item.description}
+            heroImg={item.img}
+            shape1={Heroshape1}
+            shape2={Heroshape2}
+            shape3={Heroshape3}
+            shape4={Heroshape4}
+            btnImg={BtnImg}
+          />
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  );
+};
 
-
-
-      </section>
-
-    </>
-  )
-}
-
-export default Hero
+export default HeroCarousel;
