@@ -78,7 +78,7 @@ function ChampBlog() {
                                                 <h5>{blog.title}</h5>
                                             </div>
                                             <div className="blog-btn">
-                                                <Link to="#">
+                                                <Link to="/blogs-details">
                                                     Continue Reading <img src={BlogbtnImg} alt="arrow-icon" />
                                                 </Link>
                                             </div>
