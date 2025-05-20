@@ -25,12 +25,15 @@ import TestimonialsSuccess from '../components/landingPage/about-us-component/Te
 import ScholarShipSlug from '../components/landingPage/ScholarshipSlug.jsx';
 import Tranning from '../components/landingPage/Tranning/Tranning.jsx';
 import SucessStories from '../components/landingPage/sucess-stories/SucessStories.jsx';
+import BlogsList from '../pages/blog/BlogsList.jsx';
+import BlogDetails from '../pages/blog/BlogDetails.jsx';
+import ContactUs from '../components/contact/ContactUs.jsx';
 export const MainRouter = [
     {
         path: '/',
         element: <>
-        <ScrollToTop />
-        <MainLayout />
+            <ScrollToTop />
+            <MainLayout />
         </>,
         children: [
             {
@@ -39,16 +42,16 @@ export const MainRouter = [
                 element: <Home2 />
             },
             {
-                path:'course-details/:id',
-                element:<CourseDetails />
+                path: 'course-details/:id',
+                element: <CourseDetails />
             },
             {
-                path:'course-details/:id/:slug',
-                element:<CourseDetails />
+                path: 'course-details/:id/:slug',
+                element: <CourseDetails />
             },
             {
-                path:'instructor-details/:id',
-                element:<InstructorDetails />
+                path: 'instructor-details/:id',
+                element: <InstructorDetails />
             },
             {
                 path: 'course-list',
@@ -132,14 +135,40 @@ export const MainRouter = [
             },
             {
                 path: 'up-skilling',
-                element: <UpSkilling/>
+                element: <UpSkilling />
             },
             {
                 path: 'success-stories',
                 element: <SucessStories />
             },
             {
-                path:'*',
+                path: 'blogs-list',
+                element: <BlogsList />
+            },
+  {
+                path: 'blogs-details',
+                element: <BlogDetails/>
+            },
+             {
+                path: 'live-tuition-classes',
+                element: <ComingSoon />
+            },
+              {
+                path: 'testimonials',
+                element: <SucessStories />
+            },
+            
+              {
+                path: 'recorded-courses',
+                element: <CourseList />
+            },
+
+              {
+                path: 'contact-us',
+                element: <ContactUs/>
+            },
+            {
+                path: '*',
                 element: <ComingSoon />
             }
         ]

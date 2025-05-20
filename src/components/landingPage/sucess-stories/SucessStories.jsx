@@ -8,6 +8,7 @@ import Shape2 from "../../../assets/img/landing-page/ss-shape2.png";
 import TestimonialVideoCard from "./TestimonialvideoCard";
 import { GetVideoReviewList } from "../../../services/StudentServices";
 import Head from "../../../layouts/main-layout/head/Head";
+import TestimonialSection from "../TestimonialSection";
 
 function SucessStories() {
   const [isLoading, setLoading] = useState(false)
@@ -101,40 +102,7 @@ function SucessStories() {
           </div>
         </div>
       </section>
-
-      <section>
-        <div className="container py-5">
-          <div className="row align-items-center">
-            {/* Heading Title */}
-            <div className="col-xl-12 text-center d-flex justify-content-center align-items-center flex-column">
-              <div className="tittle-box">
-                <div className="deco-img d-none d-md-block">
-                  <img src={DecorationImg} alt="icon" />
-                </div>
-                <h1 className="mb-2 fw-bold">Featured Success Stories</h1>
-              </div>
-              <p>How QuadNut learners achieved their goals</p>
-            </div>
-            {/* Heading Title End */}
-          </div>
-
-          <div className="row g-4 mt-1">
-            {testimonialsData.map((testimonial, index) => (
-              <div className="col-lg-3 col-md-6" key={index}>
-                <TestimonialVideoCard
-                  index={index}
-                  isPlaying={playingIndex === index}
-                  onTogglePlay={handleTogglePlay}
-                  videoSrc={testimonial.videoSrc}
-                  imageSrc={testimonial.imageSrc}
-                  name={testimonial.name}
-                  description={testimonial.description}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TestimonialSection />
     </>
   );
 }
