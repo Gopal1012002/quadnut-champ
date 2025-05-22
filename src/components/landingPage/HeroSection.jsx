@@ -49,7 +49,7 @@ function HeroSection({
             </div>
           </div>
 
-          <div className="col-lg-5 d-flex justify-content-center hero-img-section position-relative d-none d-lg-block">
+          <div className="col-lg-5 d-flex justify-content-center hero-img-section position-relative ">
             <div className='champ-hero-shape1'>
               <img src={shape1} alt="shape1" className='rotate-animation' />
             </div>
