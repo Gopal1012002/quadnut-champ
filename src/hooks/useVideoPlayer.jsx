@@ -13,8 +13,12 @@ const useVideoPlayer = (videoElement, props) => {
       showCancelButton: true,
       confirmButtonColor: "#06AE92",
       cancelButtonColor: "#364a63",
-      confirmButtonText: "Upgrade Now",
+      confirmButtonText: props?.isPurchased ? "Watch Here" : "Upgrade Now",
       cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        props.handleEnroll();
+      }
     });
   };
 
@@ -30,7 +34,7 @@ const useVideoPlayer = (videoElement, props) => {
       ...prevState,
       isPlaying: !prevState.isPlaying,
     }));
-    
+
   };
 
   useEffect(() => {
@@ -46,7 +50,7 @@ const useVideoPlayer = (videoElement, props) => {
     const duration = videoElement.current.duration || 0; // Default to 0 if undefined
     const totalTime = formatTime(duration);
     const currentTimeStamp = formatTime(currentTime);
-      // Update state
+    // Update state
     setTotalTimeStamps(totalTime);
     setCurrentTimeStamps(currentTimeStamp);
     const progress = (currentTime / duration) * 100;
@@ -54,15 +58,15 @@ const useVideoPlayer = (videoElement, props) => {
       ...prevState,
       progress,
     }));
-    if(duration == 0) {
+    if (duration == 0) {
       setPlayerState((prevState) => ({
         ...prevState,
-        progress : 0,
+        progress: 0,
       }));
     }
-    
+
     // Pause and show alert if the preview duration is exceeded
-    if (props.previewDuration && props.previewDuration != -1 && currentTime >= (props.previewDuration*60)) {
+    if (props.previewDuration && props.previewDuration != -1 && currentTime >= (props.previewDuration * 60)) {
       // videoElement.current.pause();
       // videoElement.current.currentTime = props.previewDuration;
       videoElement.current.pause();
@@ -70,34 +74,34 @@ const useVideoPlayer = (videoElement, props) => {
         ...prevState,
         isPlaying: false,
       }));
-      
+
       if (document.fullscreenElement) {
         document.exitFullscreen();
       }
       onCompletePreview();
     }
-    if(duration == currentTime) {
-      if(duration && currentTime){
-      props.videoComplete();
+    if (duration == currentTime) {
+      if (duration && currentTime) {
+        props.videoComplete();
       }
       videoElement.current.pause();
       setPlayerState((prevState) => ({
         ...prevState,
         isPlaying: false,
-        progress : 0,
+        progress: 0,
       }));
     }
   };
 
   const handlAudioChange = (e) => {
-    if(e.target.value == 0) {
+    if (e.target.value == 0) {
       makeMute();
-    }else{
+    } else {
       unMute();
     }
     videoElement.current.volume = e.target.value;
   }
-  
+
   const handleVideoProgress = (event) => {
     const manualChange = Number(event.target.value);
     videoElement.current.currentTime = (videoElement.current.duration / 100) * manualChange;
@@ -105,6 +109,12 @@ const useVideoPlayer = (videoElement, props) => {
       ...prevState,
       progress: manualChange,
     }));
+    const value = event.target.value;
+    setPlayerState((prev) => ({ ...prev, progress: value }));
+
+    const percentage = (value / 100) * 100;
+
+    event.target.style.background = `linear-gradient(to right, red 0%, red ${percentage}%, #ccc ${percentage}%, #ccc 100%)`;
   };
 
   const handleVideoSpeed = (event) => {

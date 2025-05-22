@@ -362,7 +362,7 @@ const CourseDetails = () => {
         {/* <!-- /Inner Banner --> */}
 
         {/* <!-- Course Content --> */}
-        <section className="page-content course-sec">
+        <section className="page-content course-sec mt-5">
           <div className="container">
             <div className="row">
               <div className="col-lg-8">

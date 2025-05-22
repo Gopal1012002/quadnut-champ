@@ -391,3 +391,45 @@ export function formatDateAndTimeTwo(dateString) {
   // Return the formatted time
   return `${dateMMY} ${hours}:${formattedMinutes} ${amPm}`;
 }
+
+
+export const HandleDebugger = (navigate) => {
+  let startTime = performance.now();
+  debugger;
+  let endTime = performance.now();
+  if (endTime - startTime > 100) {
+    navigate("/course-list")
+    return;
+  }
+}
+
+export const PreventInspect = (useEffect) => {
+    useEffect(() => {
+      // Disable right-click
+      const handleContextMenu = (e) => {
+        e.preventDefault();
+      };
+  
+      // Block dev tools keyboard shortcuts
+      const handleKeyDown = (e) => {
+        if (
+          e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S' || e.key === 'c' || e.key === 'C') ||
+          e.key === 'F12' ||
+          (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C'))
+        ) {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+      };
+  
+      document.addEventListener("contextmenu", handleContextMenu);
+      document.addEventListener("keydown", handleKeyDown);
+  
+      // Cleanup
+      return () => {
+        document.removeEventListener("contextmenu", handleContextMenu);
+        document.removeEventListener("keydown", handleKeyDown);
+      };
+    }, []);
+}
