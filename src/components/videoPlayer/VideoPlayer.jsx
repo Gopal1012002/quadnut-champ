@@ -4,11 +4,7 @@ import useVideoPlayer from "../../hooks/useVideoPlayer";
 import { BiVolumeFull, BiVolumeMute } from "react-icons/bi";
 import {
   IoPause,
-  IoPauseSharp,
   IoPlay,
-  IoPlaySharp,
-  IoPlaySkipBackSharp,
-  IoPlaySkipForwardSharp,
 } from "react-icons/io5";
 import { MdFullscreen } from "react-icons/md";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
@@ -24,19 +20,23 @@ const VideoPlayer = (props) => {
   const videoElement = useRef(null);
   const [isLoading, setIsLoading] = useState(true);
   const [showControls, setShowControls] = useState(false);
+  const hoverTimeoutRef = useRef(null);
   let hideControlsTimeout;
 
   // Show controls
   const handleMouseMove = () => {
     setShowControls(true);
+    setTimeout(() => {
+    setShowControls(false);// call your function here instead
+    }, 5000);
   };
 
   // Ensure controls disappear when mouse leaves
   const handleMouseLeave = () => {
-    clearTimeout(hideControlsTimeout);
-    hideControlsTimeout = setTimeout(() => {
-      setShowControls(false);
-    }, 1000);
+    // clearTimeout(hideControlsTimeout);
+    // hideControlsTimeout = setTimeout(() => {
+    //   setShowControls(false);
+    // }, 1000);
     // setShowControls(false);
   };
   const {
@@ -53,6 +53,8 @@ const VideoPlayer = (props) => {
   } = useVideoPlayer(videoElement, {
     previewDuration: props?.previewDuration,
     videoComplete: props?.videoComplete,
+    handleEnroll: props?.handleEnroll,
+    isPurchased: props?.isPurchased
   });
 
   useEffect(() => {
@@ -60,12 +62,12 @@ const VideoPlayer = (props) => {
       togglePlay();
     }
   }, []);
-  useEffect(()=>{
+  useEffect(() => {
     const sliderEl = document.getElementById("sliderEl");
     const tempSliderValue = 0.5;
     const progress = (tempSliderValue / sliderEl.max) * 100;
     sliderEl.style.background = `linear-gradient(to right, red ${progress}%, #ccc ${progress}%)`;
-  },[])
+  }, [])
   const handleAudioChange = (event) => {
     const sliderEl = document.getElementById("sliderEl");
     const tempSliderValue = event.target.value;
@@ -73,11 +75,17 @@ const VideoPlayer = (props) => {
     sliderEl.style.background = `linear-gradient(to right, red ${progress}%, #ccc ${progress}%)`;
     handlAudioChange(event);
   };
-
+  useEffect(() => {
+    const range = document.querySelector('.custom-range-bar');
+    if (range) {
+      const percentage = playerState.progress ?? 0;
+      range.style.setProperty('--progress', `${percentage}%`);
+    }
+  }, [playerState.progress]);
   return (
-    <div className="container-fluid" onContextMenu={(e) => e.preventDefault()}>
+    <div className="" onContextMenu={(e) => e.preventDefault()}>
       <div className="video-wrapper" onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}>
+        onMouseLeave={handleMouseLeave}>
         {isLoading && (
           <div
             className="loader-container"
@@ -100,14 +108,16 @@ const VideoPlayer = (props) => {
             />
           </div>
         )}
-        <div className="middle-play-button">
-          <div className={`play-btn-wrapper ${showControls ? "visible-controls" : "hidden-controls"}` } >
+        <div className="middle-play-button"
+        >
+          <div
+            className={`play-btn-wrapper ${showControls ? "visible-controls" : "hidden-controls"}`} >
             {
-            !playerState.isPlaying ? 
-              <FaPlay  className="center-play-btn-icon"  onClick={togglePlay} /> : 
-              <FaPause  className="center-play-btn-icon"  onClick={togglePlay}  />
+              !playerState.isPlaying ?
+                <FaPlay className="center-play-btn-icon ps-1" onClick={togglePlay} /> :
+                <FaPause className="center-play-btn-icon" onClick={togglePlay} />
             }
-            
+
           </div>
         </div>
         <div className="left-play-button">
@@ -128,8 +138,8 @@ const VideoPlayer = (props) => {
             isLoading ? { visibility: "hidden" } : { visibility: "visible" }
           }
         ></video>
-        <div 
-        className={`controls background-low-opacity ${showControls ? "visible-controls" : "hidden-controls"}`}
+        <div
+          className={`controls background-low-opacity ${showControls ? "visible-controls" : "hidden-controls"}`}
         >
           <input
             type="range"
@@ -157,7 +167,7 @@ const VideoPlayer = (props) => {
                 />
               </div>
               <div className="timestamps-front">
-                {currentTimeStamps == 0 ?  `00:00` : currentTimeStamps} / {totalTimeStamps == 0 ? `00:00` : totalTimeStamps}
+                {currentTimeStamps == 0 ? `00:00` : currentTimeStamps} / {totalTimeStamps == 0 ? `00:00` : totalTimeStamps}
               </div>
             </div>
             <div className="control-middle">
@@ -165,7 +175,7 @@ const VideoPlayer = (props) => {
                 <TbPlayerTrackPrevFilled onClick={props.playPrevVideo} />
               </div>
               <div className="play-btn" onClick={togglePlay}>
-                {!playerState.isPlaying ? <IoPlay /> : <IoPause />}
+                {!playerState.isPlaying ? <IoPlay className="play-btn-svg" /> : <IoPause className="play-btn-svg" />}
               </div>
               <div className="next-btn play-btn">
                 <TbPlayerTrackNextFilled onClick={props.playNextVideo} />
@@ -206,7 +216,7 @@ const VideoPlayer = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

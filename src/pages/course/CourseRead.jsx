@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import {
   GetCompletedLessons,
   GetCourseCompletePercentage,
@@ -9,7 +9,7 @@ import {
 import "../../assets/css/course-read.css";
 import Head from "../../layouts/main-layout/head/Head";
 import VideoPlayer from "../../components/videoPlayer/VideoPlayer";
-import { minutesToTime, minuteToHrs } from "../../utils/dynamic.util";
+import { HandleDebugger, minutesToTime, minuteToHrs, PreventInspect } from "../../utils/dynamic.util";
 import { PiClockFill } from "react-icons/pi";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
@@ -54,10 +54,11 @@ const CourseRead = () => {
   const [currentChapterLength, setCurrentChapterLength] = useState();
   const [completedLessons, setCompletedLessons] = useState([]);
   const [courseCompletePercentage, setCourseCompletePercentage] = useState(0);
-  const [currentTab, setCurrentTab] = useState("overview");
+  const [currentTab, setCurrentTab] = useState(window.innerWidth <= 981 ? "course-content" : "overview");
   const [completedChapterIdx, setCompletedChapterIdx] = useState();
   const [completedLessonIdx, setCompletedLessonIdx] = useState();
   const [isCertificate, setIsCertificate] = useState(false);
+  const navigate = useNavigate();
 
   const refreshCompletedLessons = () => {
     GetCompletedLessons(id)
@@ -86,7 +87,10 @@ const CourseRead = () => {
     refreshCompletedLessons();
     refreshCourseCompletionPercentage();
   }, []);
+
+  // PreventInspect(useEffect);
   useEffect(() => {
+    // HandleDebugger(navigate);
     setLoading(true);
     GetStudentEnrolledCourseDetailsByCode(id)
       .then((res) => {
@@ -114,30 +118,61 @@ const CourseRead = () => {
         setIsPrevExists(false);
         setIsNewExists(
           res?.data?.courseData?.chapterList?.length > 1 ||
-            res?.data?.courseData?.chapterList[0]?.lessons?.length > 1
+          res?.data?.courseData?.chapterList[0]?.lessons?.length > 1
         );
         setCurrentChapterLength(
           res?.data?.courseData?.chapterList[0]?.lessons?.length
         );
-          GetCompletedLessons(id).then((res1) => {
-            setCompletedLessons(res1?.data?.completedLessons || []);
-            if (res1?.data?.completeIdx?.length > 0) {
-              let lastCompleteIdx =
-                res1?.data?.completeIdx[res1?.data?.completeIdx?.length - 1];
-              let lastChapterIdx = lastCompleteIdx?.split("-")[0];
-              let lastLessonIdx = lastCompleteIdx?.split("-")[1];
-                toggleShowCourse(
-                  lastChapterIdx,
-                  document.getElementById(`collapse${lastChapterIdx}`, true)
-                );
-                const eleme = document.getElementById(`collapse${lastChapterIdx}`);
-                eleme.style.height= '64.67px';
-                eleme.style.height = `${res?.data?.courseData?.chapterList[lastChapterIdx]?.lessons?.length * 64.67}px`
-              
-              
+        GetCompletedLessons(id).then((res1) => {
+          setCompletedLessons(res1?.data?.completedLessons || []);
+          if (res1?.data?.completeIdx?.length > 0) {
+            let lastCompleteIdx =
+              res1?.data?.completeIdx[res1?.data?.completeIdx?.length - 1];
+            let lastChapterIdx = lastCompleteIdx?.split("-")[0];
+            let lastLessonIdx = lastCompleteIdx?.split("-")[1];
+            toggleShowCourse(
+              lastChapterIdx,
+              document.getElementById(`collapse${lastChapterIdx}`, true)
+            );
+
+            setCurrentLessonIdx(lastLessonIdx);
+            setCurrentChapterIdx(lastChapterIdx);
+            setLessonType(res?.data?.courseData?.chapterList[lastChapterIdx]?.lessons[lastLessonIdx]?.lessonType);
+            setCurrentLesson(res?.data?.courseData?.chapterList[lastChapterIdx]?.lessons[lastLessonIdx]);
+            setCurrentChapter(res?.data?.courseData?.chapterList[lastChapterIdx]);
+            if (res?.data?.courseData?.chapterList[lastChapterIdx]?.lessons[lastLessonIdx]?.lessonType === "VIDEO") {
+              setVideo(`${urlPrefix}${res?.data?.courseData?.chapterList[lastChapterIdx]?.lessons[lastLessonIdx]?.lessonResourceName}`);
+            } else if (res?.data?.courseData?.chapterList[lastChapterIdx]?.lessons[lastLessonIdx]?.lessonType === "READ") {
+              setVideo("");
+              setPdf(`${urlPrefix}${res?.data?.courseData?.chapterList[lastChapterIdx]?.lessons[lastLessonIdx]?.lessonResourceName}`);
+            } else if (res?.data?.courseData?.chapterList[lastChapterIdx]?.lessons[lastLessonIdx]?.lessonType === "TEXT") {
+              setTextData(res?.data?.courseData?.chapterList[lastChapterIdx]?.lessons[lastLessonIdx]?.lessonText);
+            } else if (
+              res?.data?.courseData?.chapterList[lastChapterIdx]?.lessons[lastLessonIdx]?.lessonType === "QUIZ" ||
+              res?.data?.courseData?.chapterList[lastChapterIdx]?.lessons[lastLessonIdx]?.lessonType === "FINAL_QUIZ"
+            ) {
+              setCurrentLessonId(res?.data?.courseData?.chapterList[lastChapterIdx]?.lessons[lastLessonIdx]?.lessonId);
             }
-          });
-        
+            setActiveLesson({
+              c_index: Number(lastChapterIdx),
+              l_index: Number(lastLessonIdx),
+            });
+            if (lastChapterIdx != 0 || lastLessonIdx != 0) {
+              setIsPrevExists(true)
+            } else {
+              setIsPrevExists(false)
+            }
+            const eleme = document.getElementById(`collapse${lastChapterIdx}`);
+            eleme.style.height = '80px';
+            eleme.style.height = `${res?.data?.courseData?.chapterList[lastChapterIdx]?.lessons?.length * 80}px`
+          } else {
+            toggleShowCourse(
+              0,
+              document.getElementById(`collapse${0}`, true)
+            );
+          }
+        });
+
       })
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
@@ -170,7 +205,6 @@ const CourseRead = () => {
   };
 
   const setLesson = (lesson, chapterIndex, lessonIndex) => {
-    console.log(chapterIndex, lessonIndex)
     setCurrentLessonIdx(lessonIndex);
     setCurrentChapterIdx(chapterIndex);
     setLessonType(lesson?.lessonType);
@@ -193,7 +227,7 @@ const CourseRead = () => {
       c_index: chapterIndex,
       l_index: lessonIndex,
     });
-  };
+  }
 
   const playPrevVideo = () => {
     if (!isPrevExists) {
@@ -203,7 +237,7 @@ const CourseRead = () => {
     } else if (currentChapterIdx === 0 && currentLessonIdx !== 0) {
       setLesson(
         courseDetails?.chapterList[currentChapterIdx]?.lessons[
-          currentLessonIdx - 1
+        currentLessonIdx - 1
         ],
         currentChapterIdx,
         currentLessonIdx - 1
@@ -211,7 +245,7 @@ const CourseRead = () => {
     } else if (currentChapterIdx !== 0 && currentLessonIdx === 0) {
       setLesson(
         courseDetails?.chapterList[currentChapterIdx - 1]?.lessons[
-          courseDetails?.chapterList[currentChapterIdx - 1]?.lessons.length - 1
+        courseDetails?.chapterList[currentChapterIdx - 1]?.lessons.length - 1
         ],
         currentChapterIdx - 1,
         courseDetails?.chapterList[currentChapterIdx - 1]?.lessons.length - 1
@@ -224,7 +258,7 @@ const CourseRead = () => {
     } else if (currentChapterIdx !== 0 && currentLessonIdx !== 0) {
       setLesson(
         courseDetails?.chapterList[currentChapterIdx]?.lessons[
-          currentLessonIdx - 1
+        currentLessonIdx - 1
         ],
         currentChapterIdx,
         currentLessonIdx - 1
@@ -235,25 +269,25 @@ const CourseRead = () => {
     if (!isNewExists) {
       toast.error("No next lesson available");
     } else if (
-      currentChapterIdx === courseDetails?.chapterList?.length - 1 &&
-      currentLessonIdx === currentChapterLength - 1
+      currentChapterIdx == courseDetails?.chapterList?.length - 1 &&
+      currentLessonIdx == courseDetails?.chapterList[currentChapterIdx]?.lessons?.length - 1
     ) {
       setIsNewExists(false);
     } else if (
-      currentChapterIdx === courseDetails?.chapterList?.length - 1 &&
-      currentLessonIdx !== currentChapterLength - 1
+      currentChapterIdx == courseDetails?.chapterList?.length - 1 &&
+      currentLessonIdx !== courseDetails?.chapterList[currentChapterIdx]?.lessons?.length - 1
     ) {
       setLesson(
         courseDetails?.chapterList[currentChapterIdx]?.lessons[
-          currentLessonIdx + 1
+        currentLessonIdx + 1
         ],
         currentChapterIdx,
         currentLessonIdx + 1
       );
       setIsPrevExists(true);
     } else if (
-      currentChapterIdx !== courseDetails?.chapterList?.length - 1 &&
-      currentLessonIdx === currentChapterLength - 1
+      currentChapterIdx != courseDetails?.chapterList?.length - 1 &&
+      currentLessonIdx == courseDetails?.chapterList[currentChapterIdx]?.lessons?.length - 1
     ) {
       setLesson(
         courseDetails?.chapterList[currentChapterIdx + 1]?.lessons[0],
@@ -277,15 +311,15 @@ const CourseRead = () => {
       }
       setIsPrevExists(true);
     } else if (
-      currentChapterIdx !== courseDetails?.chapterList?.length - 1 &&
-      currentLessonIdx !== currentChapterLength - 1
+      currentChapterIdx != courseDetails?.chapterList?.length - 1 &&
+      currentLessonIdx != courseDetails?.chapterList[currentChapterIdx]?.lessons?.length - 1
     ) {
       setLesson(
         courseDetails?.chapterList[currentChapterIdx]?.lessons[
-          currentLessonIdx + 1
+        Number(currentLessonIdx) + 1
         ],
-        currentChapterIdx,
-        currentLessonIdx + 1
+        Number(currentChapterIdx),
+        Number(currentLessonIdx) + 1
       );
       setIsPrevExists(true);
     }
@@ -304,13 +338,10 @@ const CourseRead = () => {
     const initialHeights = courseDetails?.chapterList?.map(() => 0) || [];
     setHeights(initialHeights);
   }, [courseDetails]);
-  // useEffect(() => {
-  //   setSideHeight(window.innerHeight);
-  // });
   return (
     <>
       <Head title={`${courseDetails?.courseTitle}`} />
-      <div className="container-fluid course-read-page row">
+      <div className="course-read-page">
         <div className="course-read-left col-md-8 pe-0">
           {lessonType === "VIDEO" && (
             <VideoPlayer
@@ -341,33 +372,29 @@ const CourseRead = () => {
           <div className="course-read-left-bottom">
             <div className="course-read-tab-list ">
               <div
-                className={`course-read-tab-list-1 course-content-tab ${
-                  currentTab === "course-content" ? "active" : ""
-                } `}
+                className={`course-read-tab-list-1 course-content-tab ${currentTab === "course-content" ? "active" : ""
+                  } `}
                 onClick={() => setCurrentTab("course-content")}
               >
                 Course Content
               </div>
               <div
-                className={`course-read-tab-list-1 ${
-                  currentTab === "overview" ? "active" : ""
-                } `}
+                className={`course-read-tab-list-1 ${currentTab === "overview" ? "active" : ""
+                  } `}
                 onClick={() => setCurrentTab("overview")}
               >
                 Overview
               </div>
               <div
-                className={`course-read-tab-list-1 ${
-                  currentTab === "reviews" ? "active" : ""
-                } `}
+                className={`course-read-tab-list-1 ${currentTab === "reviews" ? "active" : ""
+                  } `}
                 onClick={() => setCurrentTab("reviews")}
               >
                 Reviews
               </div>
               <div
-                className={`course-read-tab-list-1 ${
-                  currentTab === "dummy" ? "active" : ""
-                } `}
+                className={`course-read-tab-list-1 ${currentTab === "dummy" ? "active" : ""
+                  } `}
               ></div>
             </div>
             <div className="w-100 course-read-tab-view">
@@ -383,20 +410,16 @@ const CourseRead = () => {
               {currentTab === "course-content" && (
                 <div className="card content-sec user-course-read-content-sec w-100">
                   <div className="card-body p-0">
-                    <div className="row pt-3 px-3 mb-2  d-flex align-items-center">
-                      <div className="col-sm-9 pt-3">
-                        <h5 className="subs-title ">Course Content</h5>
+                    <div className="px-3 d-flex flex-row justify-content-between align-items-center">
+                      <div className="pt-3" style={{ width: 'fit-content' }}>
+                        <h5 className="subs-title">Course Content</h5>
                       </div>
-                      <div className="col-sm-3">
-                        <div className="row">
-                          <div className="col-sm-12 d-flex justify-content-end">
-                            <div style={{ width: "35px", height: "35px" }}>
-                              <CircularProgressbar
-                                value={courseCompletePercentage}
-                                text={`${courseCompletePercentage}%`}
-                              />
-                            </div>
-                          </div>
+                      <div className="float-end" style={{ width: 'fit-content' }}>
+                        <div style={{ width: "35px", height: "35px" }}>
+                          <CircularProgressbar
+                            value={courseCompletePercentage}
+                            text={`${courseCompletePercentage}%`}
+                          />
                         </div>
                       </div>
                     </div>
@@ -444,9 +467,8 @@ const CourseRead = () => {
                           </div>
                           <div
                             id={`collapse${chapterIndex}`}
-                            className={`card-collapse ${
-                              showCourse[chapterIndex] ? "show" : ""
-                            }`}
+                            className={`card-collapse ${showCourse[chapterIndex] ? "show" : ""
+                              }`}
                             style={{
                               height: `${heights[chapterIndex] || 0}px`,
                               overflow: "hidden",
@@ -461,11 +483,10 @@ const CourseRead = () => {
                                 >
                                   <div
                                     className={`lesson-side-course-read 
-                            ${
-                              activeLesson?.c_index === chapterIndex &&
-                              activeLesson?.l_index === lessonIndex &&
-                              "active"
-                            }
+                            ${activeLesson?.c_index == chapterIndex &&
+                                      activeLesson?.l_index == lessonIndex &&
+                                      "active"
+                                      }
                             py-1`}
                                   >
                                     <span className="lesson-side-course-read-right-top">
@@ -554,7 +575,7 @@ const CourseRead = () => {
         </div>
         <div
           className="col-md-4 course-read-right"
-          // style={{ height: window.innerHeight }}
+        // style={{ height: window.innerHeight }}
         >
           <div className="card content-sec user-course-read-content-sec w-100">
             <div className="card-body p-0">
@@ -611,9 +632,8 @@ const CourseRead = () => {
                   </div>
                   <div
                     id={`collapse${chapterIndex}`}
-                    className={`card-collapse ${
-                      showCourse[chapterIndex] ? "show" : ""
-                    }`}
+                    className={`card-collapse ${showCourse[chapterIndex] ? "show" : ""
+                      }`}
                     style={{
                       height: `${heights[chapterIndex] || 0}px`,
                       overflow: "hidden",
@@ -628,11 +648,10 @@ const CourseRead = () => {
                         >
                           <div
                             className={`lesson-side-course-read 
-                            ${
-                              activeLesson?.c_index === chapterIndex &&
-                              activeLesson?.l_index === lessonIndex &&
+                            ${activeLesson?.c_index == chapterIndex &&
+                              activeLesson?.l_index == lessonIndex &&
                               "active"
-                            }
+                              }
                             py-1`}
                           >
                             <span className="lesson-side-course-read-right-top">

@@ -9,7 +9,7 @@ import AboutcheckIcon from '../../assets/img/quad-champs/about/about-icon.png'
 function ChampAboutus() {
   return (
     <>
-      <section className=' about-bg'>
+      <section className=' about-bg' >
         <div className="container">
           <div className="row align-items-center gy-5">
             <div className="col-lg-6  position-relative d-flex justify-content-center hover-img-box">

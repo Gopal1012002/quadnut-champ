@@ -1,5 +1,5 @@
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { BiCheck } from 'react-icons/bi';
@@ -10,6 +10,9 @@ import ResentPostImg from '../../../assets/img/quad-champs/blog/rpost-thumb1.png
 import BlogDetailsImg from '../../../assets/img/quad-champs/blog/online-education-concept-blog.png'
 import AuthorImg from '../../../assets/img/quad-champs/blog/default_usr.jpg'
 const BlogDetailsMainSection = () => {
+
+ 
+
   return (
 
     <>
@@ -37,19 +40,14 @@ const BlogDetailsMainSection = () => {
                     </Link>
                   </div>
                 </div>
-
-
                 <ul className="list-inline d-flex flex-wrap gap-4 mb-4">
                   <li className="d-flex align-items-center">
                     <div className="author-img">
                       <img
                         src={AuthorImg}
                         alt="Author"
-
                       />
                     </div>
-
-
                     <span className="fw-medium">Anjelina Watson</span>
                   </li>
                   <li className="d-flex align-items-center text-muted">

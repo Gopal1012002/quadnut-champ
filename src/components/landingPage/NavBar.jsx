@@ -230,7 +230,7 @@ function NavBar() {
                         }) : <>
 
                           <li>
-                            <Link to="" >
+                            <Link to="/school-Preparation" >
                               School Preparation
                             </Link>
                             {/* <ul className="submenu  card shadow-sm rounded-2 py-2">
@@ -248,7 +248,7 @@ function NavBar() {
                           <li><a target='_blank' href={`https://champ.quadnut.org`} className='sub-menu-items'>NEET UG</a></li>
                         </ul> */}
                           </li>
-                           <li><Link to="/" className='sub-menu-items'>IIT JEE</Link></li>
+                           <li><Link to="/" className='sub-menu-items'>IIT JEE / NEET</Link></li>
                           <li>
                             <Link to="" >
                               STEM Learning
@@ -260,7 +260,7 @@ function NavBar() {
                         </ul> */}
                           </li>
                           <li><Link to="/" className='sub-menu-items text-nowrap'>Practical Based Learning</Link></li>
-                          <li><Link to="/" className='sub-menu-items'>Olympiads</Link></li>
+                          <li><Link to="/" className='sub-menu-items'>Olympiads / NTSE </Link></li>
                          
                         </>
                       }</ul>
@@ -271,7 +271,7 @@ function NavBar() {
                       <li><Link to={"/expertise"}>Our Expertise</Link></li>
                       <li><Link to={"/quality"}>Commitment to Quality</Link></li>
                       <li><Link to={"/track-record"}>Our Track Record</Link></li>
-                      <li ><Link to={'testimonials-success'} className='text-nowrap'>Testimonials of Success</Link></li>
+                      {/* <li ><Link to={'testimonials-success'} className='text-nowrap'>Testimonials of Success</Link></li> */}
 
                     </ul>
 

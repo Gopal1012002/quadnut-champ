@@ -28,6 +28,7 @@ import SucessStories from '../components/landingPage/sucess-stories/SucessStorie
 import BlogsList from '../pages/blog/BlogsList.jsx';
 import BlogDetails from '../pages/blog/BlogDetails.jsx';
 import ContactUs from '../components/contact/ContactUs.jsx';
+import LiveTuitionClassesPage from '../pages/Classes/LiveTuitionClassesPage.jsx';
 export const MainRouter = [
     {
         path: '/',
@@ -152,6 +153,10 @@ export const MainRouter = [
              {
                 path: 'live-tuition-classes',
                 element: <ComingSoon />
+            },
+            {
+                path:"school-Preparation",
+                element: <LiveTuitionClassesPage />
             },
               {
                 path: 'testimonials',
