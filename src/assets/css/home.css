@@ -90,8 +90,12 @@ body {
 }
 
 /*--------------------------------------------------------------
-# section tiitle image style
+# section title image style
 --------------------------------------------------------------*/
+.title {
+  color: #22100d;
+  font-weight: 500;
+}
 
 .tittle-box {
   position: relative;
@@ -838,7 +842,7 @@ body {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 80px 0px;
+  padding: 145px 0px;
 }
 
 .features-box {
@@ -953,21 +957,63 @@ body {
 }
 
 .test-img {
-  width: 550px;
+  width: 300px;
 }
 
 @media screen and (max-width: 767px) {
   .test-img {
-    width: 300px;
+    width: 140px;
   }
 }
 
 @media screen and (min-width: 1024px) and (max-width: 1200px) {
   .test-img {
-    width: 441px;
+    width: 241px;
   }
 }
 
+/* test button */
+.swiper-container-custom .silder-button {
+    position: absolute;
+    right: 12px;
+    bottom: 9px;
+}
+
+
+ .testimonial__area-button-1 {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .testimonial__area-button-next-1 {
+        background-color: var(--btn-bg-color);
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .testimonial__area-button-prev-1 {
+        background-color:  var(--btn-bg-color);
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .testimonial__area-button-next-1:hover {
+        background-color: #0e0605;
+        color:  var(--primary-txt-color);
+      }
+
+      .testimonial__area-button-prev-1:hover {
+        background-color: #130807;
+        color: var(--primary-txt-color);
+      }
 /*--------------------------------------------------------------
 # champ blog
 --------------------------------------------------------------*/
@@ -988,6 +1034,18 @@ body {
   padding: 25px 25px 35px;
   overflow: hidden;
 }
+/* .blog-img-box{
+
+  height:250px ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+.blog-img-box img{
+  width: 100%;
+  object-fit: cover;
+} */
 
 .blog-date span {
   display: inline-block;

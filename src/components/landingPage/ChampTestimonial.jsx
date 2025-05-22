@@ -9,6 +9,7 @@ import TestiShape1 from '../../assets/img/quad-champs/into-video/testi-shape1.pn
 import TestiShape2 from '../../assets/img/quad-champs/into-video/testi-like.png'
 
 import ChamptesitimonialCard from './ChamptesitimonialCard'
+import ChampTesitimonialSwiper from './ChampTesitimonialSwiper'
 
 function ChampTestimonial() {
     return (
@@ -38,7 +39,9 @@ function ChampTestimonial() {
                                     Dedicated Learners</h1>
 
                             </div>
-                            <ChamptesitimonialCard />
+                            {/* <ChamptesitimonialCard /> */}
+
+                            <ChampTesitimonialSwiper/>
 
 
 

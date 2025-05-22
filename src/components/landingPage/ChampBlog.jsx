@@ -62,7 +62,7 @@ function ChampBlog() {
                                                 <div className="blog-date">
                                                     <span>{blog.date}</span>
                                                 </div>
-                                               <div className='hover-effect-img'>
+                                               <div className='hover-effect-img blog-img-box '>
                                                  <img src={blog.img} alt="blog" className="rounded-2" />
                                                </div>
                                             </div>
