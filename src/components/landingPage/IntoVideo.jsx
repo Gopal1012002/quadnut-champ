@@ -23,11 +23,12 @@ function IntoVideo() {
                                 <div><span><img src={SectiontittleImg} alt="book-icon" className='img-fluid me-1' /></span><span className='about-txt'>Introductory Video</span></div>
                                 <h1 className='mt-3 text-center text-lg-start'>Upgrade Your Skills with the
                                     Newest Trends</h1>
-                                <p className='mt-md-3 text-center text-lg-start'>Combining a rich history cutting-edge technology this fostering academic and personal Conveniently architect meta-services through whiteboard world-class</p>
-                                <ul className='mt-lg-5'>
-                                    <li className='pb-3 d-flex gap-1'><div><img src={AboutcheckIcon} alt="icon" className='me-2' /></div><div>Learning with Multimedia & Interactivity</div></li>
-                                    <li className='pb-3 d-flex gap-1'><div><img src={AboutcheckIcon} alt="icon" className='me-2' /></div><div>Learning with Multimedia & Interactivity</div></li>
-                                    <li className='pb-3 d-flex gap-1'><div><img src={AboutcheckIcon} alt="icon" className='me-2' /></div><div>Learning with Multimedia & Interactivity</div></li>
+                                <p className='mt-md-3 text-center text-lg-start'>Empowering learners through a blend of tradition and technology. Explore interactive tools, smart classrooms, and personalized learning paths.</p>
+                                <h3 className='mt-2 text-center text-lg-start'>Learning with Multimedia & Interactivity</h3>
+                                <ul className='mt-lg-2'>
+                                    <li className='pb-3 d-flex gap-1'><div><img src={AboutcheckIcon} alt="icon" className='me-2' /></div><div>Video-based lessons</div></li>
+                                    <li className='pb-3 d-flex gap-1'><div><img src={AboutcheckIcon} alt="icon" className='me-2' /></div><div>Interactive whiteboards</div></li>
+                                    <li className='pb-3 d-flex gap-1'><div><img src={AboutcheckIcon} alt="icon" className='me-2' /></div><div>Collaborative virtual classrooms</div></li>
                                 </ul>
                             </div>
                             {/* common btn start */}
