@@ -9,6 +9,9 @@
   --third-color-300: #ff9432;
   --fourth-color-200: #ffd8a5;
   --primary-txt-color: #f75800;
+
+
+  
   --header-bg-color: #c44276;
   --footer-bg-color: #202020;
   --text-white: #ffffff;
@@ -89,6 +92,65 @@ body {
   }
 }
 
+
+.burger {
+  width: 43px;
+  height: 35px;
+  border-radius: 6px;
+  background: white;
+  box-shadow: rgb(136 165 191 / 48%) 6px 2px 16px 0px, rgb(255 255 255 / 80%) -6px -2px 16px 0px;
+  ;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  transition: all .5s ease;
+  /* margin: 1em; */
+}
+
+.burger:hover {
+  background: rgb(56 56 56);
+}
+
+.burger-strip {
+  transition: all .5s ease;
+}
+
+.strip div {
+  height: 3px;
+  border-radius: 2px;
+  background: rgb(56 56 56);
+  margin: 5px;
+  transition: all .55s cubic-bezier(0.075, 0.82, 0.165, 1);
+  width: 26px;
+}
+
+.burger:hover .strip div {
+  background: white;
+}
+
+/* BURGER 1 */
+.burger-strip div:first-child {
+  width: 16px;
+}
+
+.burger-strip div:last-child {
+  width: 20px;
+}
+
+.burger:hover .burger-strip div:first-child {
+  transform: rotate(45deg) translateY(1px) translateX(5px);
+}
+
+.burger:hover .burger-strip div:nth-child(2) {
+  transform: rotate(-45deg);
+}
+
+.burger:hover .burger-strip div:last-child {
+  transform: rotate(45deg) translateY(-9px) translateX(2px);
+}
+
 /*--------------------------------------------------------------
 # section title image style
 --------------------------------------------------------------*/
@@ -127,8 +189,7 @@ body {
 /*--------------------------------------------------------------
 # animation 
 --------------------------------------------------------------*/
-.soheb {
-}
+.soheb {}
 
 .rotate-animation {
   animation: rotateme 18s linear infinite;
@@ -291,14 +352,12 @@ body {
 }
 
 .champ-common-btn :hover::before {
-  clip-path: polygon(
-    25% -70%,
-    75% -70%,
-    120% 50%,
-    75% 170%,
-    25% 170%,
-    -20% 50%
-  );
+  clip-path: polygon(25% -70%,
+      75% -70%,
+      120% 50%,
+      75% 170%,
+      25% 170%,
+      -20% 50%);
 }
 
 .btn-txt {
@@ -448,7 +507,9 @@ body {
 
 @media (max-width: 768px) {
   .nav-links {
-    justify-content: center;
+    /* justify-content: center; */
+    display: flex;
+    flex-direction: column;
   }
 
   .quadnut-title {
@@ -457,7 +518,7 @@ body {
 }
 
 /* drop down menu for header */
-.menu > li {
+.menu>li {
   position: relative;
 }
 
@@ -504,7 +565,7 @@ body {
   font-size: 14px !important;
 }
 
-.submenu li:hover > a {
+.submenu li:hover>a {
   background: var(--third-color-300);
   border-radius: 3px;
   color: #000;
@@ -512,7 +573,7 @@ body {
   transform: translateX(3px);
 }
 
-.menu li:hover > .submenu {
+.menu li:hover>.submenu {
   visibility: visible;
   top: 105%;
   opacity: 1;
@@ -691,6 +752,7 @@ body {
   font-size: 14px;
   font-weight: 600;
 }
+
 .our-vision {
   background-color: var(--fourth-color-200);
 }
@@ -732,6 +794,7 @@ body {
   border-radius: 12px;
   object-fit: cover;
 }
+
 .img-1 img {
   display: block;
   width: 100%;
@@ -974,46 +1037,48 @@ body {
 
 /* test button */
 .swiper-container-custom .silder-button {
-    position: absolute;
-    right: 12px;
-    bottom: 9px;
+  position: absolute;
+  right: 12px;
+  bottom: 9px;
 }
 
 
- .testimonial__area-button-1 {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-      }
+.testimonial__area-button-1 {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
 
-      .testimonial__area-button-next-1 {
-        background-color: var(--btn-bg-color);
-        height: 50px;
-        width: 50px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
+.testimonial__area-button-next-1 {
+  background-color: var(--btn-bg-color);
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-      .testimonial__area-button-prev-1 {
-        background-color:  var(--btn-bg-color);
-        height: 50px;
-        width: 50px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .testimonial__area-button-next-1:hover {
-        background-color: #0e0605;
-        color:  var(--primary-txt-color);
-      }
+.testimonial__area-button-prev-1 {
+  background-color: var(--btn-bg-color);
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-      .testimonial__area-button-prev-1:hover {
-        background-color: #130807;
-        color: var(--primary-txt-color);
-      }
+.testimonial__area-button-next-1:hover {
+  background-color: #0e0605;
+  color: var(--primary-txt-color);
+}
+
+.testimonial__area-button-prev-1:hover {
+  background-color: #130807;
+  color: var(--primary-txt-color);
+}
+
 /*--------------------------------------------------------------
 # champ blog
 --------------------------------------------------------------*/
@@ -1034,6 +1099,7 @@ body {
   padding: 25px 25px 35px;
   overflow: hidden;
 }
+
 /* .blog-img-box{
 
   height:250px ;
@@ -1110,21 +1176,21 @@ body {
 }
 
 .blog-btn a:hover::before {
-  clip-path: polygon(
-    25% -70%,
-    75% -70%,
-    120% 50%,
-    75% 170%,
-    25% 170%,
-    -20% 50%
-  );
+  clip-path: polygon(25% -70%,
+      75% -70%,
+      120% 50%,
+      75% 170%,
+      25% 170%,
+      -20% 50%);
 }
 
 .blog-btn a:hover img {
   filter: brightness(0) invert(1);
 }
 
-/* / key features / */
+/*--------------------------------------------------------------
+# champ key features
+--------------------------------------------------------------*/
 .pp {
   font-size: 22px;
   font-weight: 500;
@@ -1177,6 +1243,81 @@ body {
   height: auto;
   object-fit: contain;
 }
+
+/*--------------------------------------------------------------
+--------------------------------------------------------------
+# champ inner pages css
+--------------------------------------------------------------
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+#1 champ School prepration
+--------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------
+#2 champ foundation
+--------------------------------------------------------------*/
+
+.foundation-bg {
+  padding: 80px;
+  background-image: url("../img/quad-champs/foundation/foundation-bg-image.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.foundation-bg h1 {
+  font-size: 60px;
+  font-weight: 600;
+  font-family: Outfit, serif;
+}
+
+
+@media only screen and (max-width: 767px) {
+  .foundation-bg h1 {
+    font-size: 24px;
+  }
+
+  .foundation-bg {
+    padding: 20px;
+
+  }
+}
+
+.competitions-box img {
+  width: 90%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* footer css start */
 .footer-bg {
@@ -1303,7 +1444,7 @@ body {
     width: 15px;
   }
 } */
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 1199px) {
   .nav-links {
     display: flex;
     flex-direction: column;
@@ -1315,7 +1456,7 @@ body {
   }
 
   .nav-links li {
-    padding-bottom: 15px;
+    padding-bottom: 32px;
   }
 
   .nav-links li a span {
@@ -1685,7 +1826,7 @@ body {
   padding: 0 15px;
 }
 
-.ko-faq-section .ko-container > p {
+.ko-faq-section .ko-container>p {
   text-align: center;
   font-size: 16px;
   line-height: 24px;
@@ -2657,7 +2798,7 @@ p.feature-desc {
   color: var(--primary-color);
 }
 
-.blog-hero-section .hero_content > p {
+.blog-hero-section .hero_content>p {
   font-size: 16px;
   line-height: 26px;
   color: #152e41;
@@ -2707,14 +2848,12 @@ p.feature-desc {
   height: 100%;
   top: 0;
   bottom: auto;
-  clip-path: polygon(
-    25% -70%,
-    75% -70%,
-    120% 50%,
-    75% 170%,
-    25% 170%,
-    -20% 50%
-  );
+  clip-path: polygon(25% -70%,
+      75% -70%,
+      120% 50%,
+      75% 170%,
+      25% 170%,
+      -20% 50%);
 }
 
 .blog-hero-section .hero-btn a:hover {
@@ -2771,7 +2910,7 @@ p.feature-desc {
     line-height: 38px;
   }
 
-  .blog-hero-section .hero_content > p {
+  .blog-hero-section .hero_content>p {
     font-size: 16px;
     line-height: 24px;
     color: #152e41;
@@ -2829,6 +2968,7 @@ p.feature-desc {
     top: 100px;
   }
 }
+
 @media (max-width: 726px) {
   .blog-details-area .blog-right-sidebar .rpost-title h4 a {
     font-size: 12px;
@@ -2983,11 +3123,13 @@ p.feature-desc {
   width: 100%;
   object-fit: contain;
 }
+
 @media (max-width: 991px) {
   .blog-details-area .user-img {
     width: 50px;
   }
 }
+
 @media (max-width: 426px) {
   .blog-details-area .user-img {
     width: 60px;
@@ -2999,6 +3141,7 @@ p.feature-desc {
     width: 100px;
   }
 }
+
 @media (min-width: 992px) {
   .blog-details-area .user-img {
     width: 40px;

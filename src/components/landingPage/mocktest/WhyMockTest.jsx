@@ -27,7 +27,6 @@ const WhyMockTest = () => {
 
         
             </div>
-
             <div className="row align-items-start g-4 mt-4">
                 <div className="col-lg-4 col-md-6 d-flex align-items-xl-end align-items-center flex-column">
                     <div className="mocktest-card">
@@ -103,7 +102,6 @@ const WhyMockTest = () => {
                 </div>
 
             </div>
-
         </div>
     )
 }

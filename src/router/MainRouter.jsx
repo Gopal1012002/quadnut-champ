@@ -29,6 +29,8 @@ import BlogsList from '../pages/blog/BlogsList.jsx';
 import BlogDetails from '../pages/blog/BlogDetails.jsx';
 import ContactUs from '../components/contact/ContactUs.jsx';
 import LiveTuitionClassesPage from '../pages/Classes/LiveTuitionClassesPage.jsx';
+import SchoolPreparationPage from '../pages/champCategories/SchoolPreparationPage.jsx';
+import FoundationPage from '../pages/champCategories/FoundationPage.jsx';
 export const MainRouter = [
     {
         path: '/',
@@ -146,31 +148,36 @@ export const MainRouter = [
                 path: 'blogs-list',
                 element: <BlogsList />
             },
-  {
+            {
                 path: 'blogs-details',
-                element: <BlogDetails/>
+                element: <BlogDetails />
             },
-             {
+            {
                 path: 'live-tuition-classes',
                 element: <ComingSoon />
             },
+
             {
-                path:"school-Preparation",
-                element: <LiveTuitionClassesPage />
+                path: "school-preparation",
+                element: <SchoolPreparationPage />
             },
-              {
+             {
+                path: "foundation",
+                element: <FoundationPage />
+            },
+            {
                 path: 'testimonials',
                 element: <SucessStories />
             },
-            
-              {
+
+            {
                 path: 'recorded-courses',
                 element: <CourseList />
             },
 
-              {
+            {
                 path: 'contact-us',
-                element: <ContactUs/>
+                element: <ContactUs />
             },
             {
                 path: '*',
