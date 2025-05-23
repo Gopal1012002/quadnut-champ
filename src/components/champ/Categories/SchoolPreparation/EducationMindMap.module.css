@@ -1,0 +1,188 @@
+.featureCard {
+	background-color: #f9fafe;
+	border: 1px solid #dee2e6;
+	border-radius: 12px;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	padding: 15px 10px 15px 15px;
+	position: relative;
+	overflow: hidden;
+	height: calc(100% - 30px);
+}
+
+.featureCard::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	/* background: #ff740a; */
+	background: #e0a577;
+	background: linear-gradient(90deg, rgba(224, 165, 119, 1) 1%, rgba(237, 221, 83, 1) 99%);
+	border-radius: 500px 500px 0 0;
+	height: 0;
+	width: 100%;
+	transition: all 0.4s ease-in-out;
+	z-index: 0;
+}
+
+.featureCard.active::after,
+.featureCard:hover::after {
+	height: 100%;
+	border-radius: 0;
+}
+
+/* .featureCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  background-color: #e7c76f;
+} */
+
+.imgBox {
+	height: 80px;
+	width: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #f9fafe;
+	border-radius: 50%;
+	margin-bottom: 15px;
+	transition: all 0.4s ease-in-out;
+	z-index: 1;
+	padding: 10px;
+}
+.imgBox img{
+	width: 100%;
+	object-fit: contain;
+	animation: fadeInOut 5s infinite;
+}
+
+.featureCard h5{
+	font-size: 1.2rem;
+}
+.featureCard:hover h5 {
+	color: #1e1e1e;
+	
+}
+
+.cardContent {
+	position: relative;
+    text-align: center;
+	transition: all 0.3s ease-in-out;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+
+
+@keyframes fadeInOut {
+  0% { opacity: 1; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1); }
+  100% { opacity: 1; transform: scale(0.7); }
+}
+
+
+
+
+
+.service-item {
+	position: relative;
+	background-color: var(--white-color);
+	border: 1px solid var(--divider-color);
+	border-radius: 20px;
+	height: calc(100% - 30px);
+	margin-bottom: 30px;
+	padding: 30px;
+	overflow: hidden;
+}
+
+.service-item::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: var(--accent-color);
+	border-radius: 500px 500px 0 0;
+	height: 0;
+	width: 100%;
+	transition: all 0.4s ease-in-out;
+	z-index: 0;
+}
+
+.service-item.active::after,
+.service-item:hover::after {
+	height: 100%;
+	border-radius: 0;
+}
+
+.service-item .icon-box {
+	position: relative;
+	height: 70px;
+	width: 70px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--secondary-color);
+	border-radius: 50%;
+	margin-bottom: 40px;
+	transition: all 0.4s ease-in-out;
+	z-index: 1;
+}
+
+.service-item .icon-box img {
+	width: 100%;
+	max-width: 50px;
+}
+
+.service-item-content {
+	position: relative;
+	border-bottom: 1px solid var(--divider-color);
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	transition: all 0.3s ease-in-out;
+	z-index: 1;
+}
+
+.service-item.active .service-item-content,
+.service-item:hover .service-item-content {
+	border-bottom-color: var(--dark-divider-color);
+}
+
+.service-item-content h3 {
+	font-size: 20px;
+	margin-bottom: 15px;
+	transition: all 0.3s ease-in-out;
+}
+
+.service-item-content h3 a {
+	color: inherit;
+}
+
+.service-item-content p {
+	margin-bottom: 0;
+	transition: all 0.3s ease-in-out;
+}
+
+.service-readmore-btn {
+	position: relative;
+	z-index: 1;
+}
+
+.service-item.active .service-item-content h3,
+.service-item.active .service-item-content2 h3,
+.service-item:hover .service-item-content h3,
+.service-item:hover .service-item-content2 h3,
+.service-item.active .service-item-content p,
+.service-item:hover .service-item-content p,
+.service-item.active .service-readmore-btn .readmore-btn,
+.service-item:hover .service-readmore-btn .readmore-btn {
+	color: var(--white-color);
+}
+
+.service-item.active .readmore-btn::before,
+.service-item:hover .readmore-btn::before {
+	filter: brightness(0) invert(1);
+}
