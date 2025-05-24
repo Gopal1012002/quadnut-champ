@@ -274,26 +274,19 @@ function NavBar() {
                             <Link to="/school-preparation">
                               School Preparation
                             </Link>
-                            {/* <ul className="submenu  card shadow-sm rounded-2 py-2">
-                          <li><Link to={`/training`} className='sub-menu-items'>Training</Link></li>
-                          <li><Link to={`/up-skilling`} className='sub-menu-items'>Upskilling</Link></li>
-                        </ul> */}
+                            
                           </li>
                           <li>
                             <Link to="/foundation">Foundation</Link>
                           </li>
                           <li>
-                            <Link to="/" className="sub-menu-items">
+                            <Link to="/iit-jee">
                               IIT JEE / NEET
                             </Link>
                           </li>
                           <li>
                             <Link to="">STEM Learning</Link>
-                            {/* <ul className="submenu  card shadow-sm rounded-2 py-2">
-                          <li><a target='_blank' href={`https://champ.quadnut.org`} className='sub-menu-items'>Banking</a></li>
-                          <li><a target='_blank' href={`https://champ.quadnut.org`} className='sub-menu-items'>SSC</a></li>
-                          <li><a target='_blank' href={`https://champ.quadnut.org`} className='sub-menu-items'>Railways</a></li>
-                        </ul> */}
+                          
                           </li>
                           <li>
                             <Link to="/" className="sub-menu-items text-nowrap">

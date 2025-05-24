@@ -21,7 +21,6 @@ const SchoolPreparationHeroSection = () => {
                         </div>
                         <div className="col-lg-5  d-flex justify-content-center">
                             <div className='tr-hero-box'>
-                              
                                 <img src={HeroImg} alt="image" className='img-fluid' style={{ width: "470px" }} />
                             </div>
                         </div>
