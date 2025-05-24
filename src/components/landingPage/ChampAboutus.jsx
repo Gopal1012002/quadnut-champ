@@ -54,11 +54,6 @@ function ChampAboutus() {
                   </div>
                 </div>
               </div>
-              {/* common btn start */}
-              {/* <div className='champ-common-btn mt-3'>
-                <span><img src={BtnImg} alt="immage" className='me-2' /></span><span className='btn-txt'>More About</span>
-              </div> */}
-              {/* common btn end */}
             </div>
           </div>
         </div>

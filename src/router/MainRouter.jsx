@@ -31,6 +31,7 @@ import ContactUs from '../components/contact/ContactUs.jsx';
 import LiveTuitionClassesPage from '../pages/Classes/LiveTuitionClassesPage.jsx';
 import SchoolPreparationPage from '../pages/champCategories/SchoolPreparationPage.jsx';
 import FoundationPage from '../pages/champCategories/FoundationPage.jsx';
+import IITPage from '../pages/champCategories/IITPage.jsx';
 export const MainRouter = [
     {
         path: '/',
@@ -164,6 +165,10 @@ export const MainRouter = [
              {
                 path: "foundation",
                 element: <FoundationPage />
+            },
+               {
+                path: "iit-jee",
+                element: <IITPage />
             },
             {
                 path: 'testimonials',
